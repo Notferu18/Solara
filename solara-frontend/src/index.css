@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #FAF3E0;
+    font-family: 'Georgia', serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-solara-brown text-white px-4 py-2 rounded-lg hover:bg-solara-dark transition-colors duration-200 font-semibold;
+  }
+  .btn-secondary {
+    @apply bg-solara-cream text-solara-brown px-4 py-2 rounded-lg border border-solara-brown hover:bg-solara-brown hover:text-white transition-colors duration-200 font-semibold;
+  }
+  .btn-gold {
+    @apply bg-solara-gold text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity duration-200 font-semibold;
+  }
+  .card {
+    @apply bg-white rounded-xl shadow-md p-6 border border-solara-cream;
+  }
+  .input-field {
+    @apply w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-solara-brown bg-white text-gray-800;
+  }
+  .badge-pending {
+    @apply bg-yellow-100 text-yellow-800 text-xs font-bold px-2 py-1 rounded-full;
+  }
+  .badge-preparing {
+    @apply bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded-full;
+  }
+  .badge-ready {
+    @apply bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded-full;
+  }
+  .badge-completed {
+    @apply bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded-full;
+  }
+  .badge-cancelled {
+    @apply bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded-full;
+  }
+}
