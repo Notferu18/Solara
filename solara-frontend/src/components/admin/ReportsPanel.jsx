@@ -16,8 +16,12 @@ useEffect(() => { fetchReports(); }, [period]);
     setLoading(true);
     try {
       const res = await api.get(`/reports/sales?period=${period}`);
+      console.log('Reports API response:', res.data);
       setData(res.data);
-    } catch {}
+    } catch (err) {
+      console.error('Reports fetch error:', err.response?.data || err.message);
+      setData(null);
+    }
     setLoading(false);
   };
 

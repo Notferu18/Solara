@@ -44,9 +44,6 @@ class OrderController extends Controller
 
         DB::beginTransaction();
         try {
-            // Generate order number
-            $orderNumber = 'ORD-' . str_pad(Order::count() + 1, 4, '0', STR_PAD_LEFT);
-
             // Calculate total
             $total = 0;
             foreach ($request->items as $item) {
@@ -54,14 +51,18 @@ class OrderController extends Controller
                 $total   += $menuItem->price * $item['quantity'];
             }
 
-            // Create order
+            // Create order with a temporary unique placeholder number,
+            // then update it based on the generated order ID.
             $order = Order::create([
                 'user_id'        => $request->user()->id,
-                'order_number'   => $orderNumber,
+                'order_number'   => 'ORD-TMP-' . uniqid(),
                 'status'         => 'pending',
                 'total_amount'   => $total,
                 'payment_method' => $request->payment_method,
             ]);
+
+            $orderNumber = 'ORD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT);
+            $order->update(['order_number' => $orderNumber]);
 
             // Create order items + deduct stock
             foreach ($request->items as $item) {
@@ -111,9 +112,6 @@ class OrderController extends Controller
 
     DB::beginTransaction();
     try {
-        $orderNumber = 'ORD-' . str_pad(Order::count() + 1, 4, '0', STR_PAD_LEFT);
-        $queueNumber = 'Q-'   . str_pad((Order::whereDate('created_at', today())->count() + 1), 3, '0', STR_PAD_LEFT);
-
         $total = 0;
         foreach ($request->items as $item) {
             $menuItem = MenuItem::findOrFail($item['menu_item_id']);
@@ -131,11 +129,18 @@ class OrderController extends Controller
 
         $order = Order::create([
             'user_id'        => $kioskUser->id,
-            'order_number'   => $orderNumber,
-            'queue_number'   => $queueNumber,
+            'order_number'   => 'ORD-TMP-' . uniqid(),
+            'queue_number'   => 'Q-TMP-' . uniqid(),
             'status'         => 'pending',
             'total_amount'   => $total,
             'payment_method' => $request->payment_method,
+        ]);
+
+        $orderNumber = 'ORD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT);
+        $queueNumber = 'Q-' . str_pad($order->id, 3, '0', STR_PAD_LEFT);
+        $order->update([
+            'order_number' => $orderNumber,
+            'queue_number' => $queueNumber,
         ]);
 
         foreach ($request->items as $item) {
