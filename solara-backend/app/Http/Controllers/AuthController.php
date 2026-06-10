@@ -30,22 +30,25 @@ class AuthController extends Controller
         return response()->json(['user' => $user, 'token' => $token], 201);
     }
 
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required',
-        ]);
+public function login(Request $request)
+{
+    $request->validate([
+        'email'    => 'required|email',
+        'password' => 'required',
+    ]);
 
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Invalid email or password.'], 401);
-        }
-
-        $user  = Auth::user();
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json(['user' => $user, 'token' => $token]);
+    if (!Auth::attempt($request->only('email', 'password'))) {
+        return response()->json(['message' => 'Invalid email or password.'], 401);
     }
+
+    $user  = Auth::user();
+
+    // Delete old tokens then create new one
+    $user->tokens()->delete();
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    return response()->json(['user' => $user, 'token' => $token]);
+}
 
     public function logout(Request $request)
     {

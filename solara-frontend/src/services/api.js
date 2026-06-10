@@ -4,8 +4,9 @@ const api = axios.create({
   baseURL: 'http://localhost:8000/api',
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  }
+    'Accept':       'application/json',
+  },
+  withCredentials: false, // ← this was true, causing CSRF error
 });
 
 // Auto-attach token to every request
@@ -17,11 +18,15 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Auto-handle 401 (expired/invalid token)
+// Auto-handle 401
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const isPublicRoute =
+      error.config?.url?.includes('/public') ||
+      error.config?.url?.includes('/kiosk');
+
+    if (error.response?.status === 401 && !isPublicRoute) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/login';

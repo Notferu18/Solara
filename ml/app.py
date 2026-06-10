@@ -3,12 +3,15 @@ import joblib
 import numpy as np
 
 app    = Flask(__name__)
-model  = joblib.load('ml/model.pkl')
-scaler = joblib.load('ml/scaler.pkl')
+
+# ── Load saved .pkl files ────────────────────────────────
+model  = joblib.load('ml/model.pkl')   # Random Forest Regressor
+scaler = joblib.load('ml/scaler.pkl')  # StandardScaler
 
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
+    # Expects: { category_id, price, day_of_week, month }
 
     features = np.array([[
         data.get('category_id', 1),
@@ -17,7 +20,10 @@ def predict():
         data.get('month', 1),
     ]])
 
-    features_scaled    = scaler.transform(features)
+    # Scale using the saved scaler
+    features_scaled = scaler.transform(features)
+
+    # Predict using the saved model
     predicted_quantity = model.predict(features_scaled)[0]
 
     return jsonify({
@@ -26,7 +32,7 @@ def predict():
 
 @app.route('/health', methods=['GET'])
 def health():
-    return jsonify({'status': 'ok'})
+    return jsonify({ 'status': 'ok', 'model': 'Random Forest Regressor' })
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)

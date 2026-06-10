@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import Login from './components/auth/Login';
+import Register from "./components/auth/Register";
 
 // Admin
 import AdminDashboard from './components/admin/AdminDashboard';
+import KioskPage from './components/kiosk/KioskPage';
 
 // Staff
 import POSInterface from './components/staff/POSInterface';
@@ -35,7 +37,8 @@ export default function App() {
       <Routes>
         {/* Public */}
         <Route path="/login" element={<Login />} />
-
+        <Route path="/register" element={<Register />} />
+        <Route path="/kiosk" element={<KioskPage />} />
         {/* Role redirect from root */}
         <Route path="/" element={<RoleRedirect />} />
 

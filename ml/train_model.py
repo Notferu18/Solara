@@ -4,66 +4,48 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_absolute_error, r2_score
 import joblib
-import mysql.connector
+import os
 
-# ── Connect to Laragon MySQL ─────────────────────────────────
-conn = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='',
-    database='solara_db'
-)
+csv_path = 'ml/data/solara_sales_data.csv'
+df = pd.read_csv(csv_path)
 
-# ── Pull sales data ──────────────────────────────────────────
-query = """
-    SELECT
-        oi.menu_item_id,
-        mi.category_id,
-        mi.price,
-        DAYOFWEEK(o.created_at)  AS day_of_week,
-        MONTH(o.created_at)      AS month,
-        SUM(oi.quantity)         AS total_sold
-    FROM order_items oi
-    JOIN orders     o  ON oi.order_id     = o.id
-    JOIN menu_items mi ON oi.menu_item_id = mi.id
-    WHERE o.status = 'completed'
-    GROUP BY oi.menu_item_id, mi.category_id, mi.price,
-             DAYOFWEEK(o.created_at), MONTH(o.created_at)
-"""
-
-df = pd.read_sql(query, conn)
-conn.close()
-
-print(f"Loaded {len(df)} records from database")
+print(f"Loaded {len(df)} records from CSV")
+print(f"   Columns: {list(df.columns)}")
 print(df.head())
 
-# ── Features & target ────────────────────────────────────────
+# ── Features (X) and Target (y) ─────────────────────────────
+# Supervised ML: model learns features → target relationship
 X = df[['category_id', 'price', 'day_of_week', 'month']]
-y = df['total_sold']
+y = df['quantity_sold']   # ← This is the label (known answer)
 
-# ── Scale features ───────────────────────────────────────────
-scaler = StandardScaler()
+# ── Scale features (StandardScaler) ─────────────────────────
+scaler   = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# ── Train/test split ─────────────────────────────────────────
+# ── Train / Test Split ───────────────────────────────────────
 X_train, X_test, y_train, y_test = train_test_split(
     X_scaled, y, test_size=0.2, random_state=42
 )
+
+print(f"\nDataset split:")
+print(f"   Training rows : {len(X_train)}")
+print(f"   Testing rows  : {len(X_test)}")
 
 # ── Train Random Forest Regressor ────────────────────────────
 model = RandomForestRegressor(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-# ── Evaluate ─────────────────────────────────────────────────
+# ── Evaluate the model ───────────────────────────────────────
 y_pred = model.predict(X_test)
 mae    = mean_absolute_error(y_test, y_pred)
 r2     = r2_score(y_test, y_pred)
 
 print(f"\nModel Performance:")
-print(f"   MAE : {mae:.2f}")
-print(f"   R²  : {r2:.2f}")
+print(f"   MAE (Mean Absolute Error) : {mae:.2f}")
+print(f"   R² Score                  : {r2:.2f}")
 
-# ── Save .pkl files ──────────────────────────────────────────
+# ── Save as .pkl files (required deliverables) ───────────────
+os.makedirs('ml', exist_ok=True)
 joblib.dump(model,  'ml/model.pkl')
 joblib.dump(scaler, 'ml/scaler.pkl')
 

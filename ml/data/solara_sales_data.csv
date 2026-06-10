@@ -1,0 +1,724 @@
+date,day_of_week,month,item_name,category,category_id,price,quantity_sold,total_sales
+2026-05-10,7,5,Cafe Latte,Coffee,1,79,3,237
+2026-05-10,7,5,Spanish,Coffee,1,89,1,89
+2026-05-10,7,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-10,7,5,Barista Signature,Coffee,1,89,1,89
+2026-05-10,7,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-10,7,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-10,7,5,Caramel Macchiato,Coffee,1,99,3,297
+2026-05-10,7,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-10,7,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-10,7,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-10,7,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-10,7,5,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-10,7,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-10,7,5,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-10,7,5,Kimchi Rice w/ Egg,Meals,3,99,2,198
+2026-05-10,7,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-10,7,5,Beef Bibimbab w/ Egg,Meals,3,149,1,149
+2026-05-10,7,5,4pcs Chix Winglet,Meals,3,119,2,238
+2026-05-10,7,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-10,7,5,Tocilog,Meals,3,79,1,79
+2026-05-10,7,5,Longsilog,Meals,3,79,2,158
+2026-05-10,7,5,Hotsilog,Meals,3,79,2,158
+2026-05-10,7,5,Tapsilog,Meals,3,89,1,89
+2026-05-10,7,5,Spamsilog,Meals,3,89,1,89
+2026-05-10,7,5,Baconsilog,Meals,3,89,1,89
+2026-05-10,7,5,Seasoned Fries,Snacks,4,69,3,207
+2026-05-10,7,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-10,7,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-10,7,5,Choco Chip Pancake,Snacks,4,69,2,138
+2026-05-10,7,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-10,7,5,Quesadilla Cheese,Snacks,4,109,2,218
+2026-05-11,1,5,Cafe Latte,Coffee,1,79,3,237
+2026-05-11,1,5,Spanish,Coffee,1,89,2,178
+2026-05-11,1,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-11,1,5,Barista Signature,Coffee,1,89,2,178
+2026-05-11,1,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-11,1,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-11,1,5,Caramel Macchiato,Coffee,1,99,2,198
+2026-05-11,1,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-11,1,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-11,1,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,2,138
+2026-05-11,1,5,Citron & Ginger,Non-Coffee & Tea,2,69,2,138
+2026-05-11,1,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-11,1,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-11,1,5,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-11,1,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-11,1,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-11,1,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-11,1,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-11,1,5,Tocilog,Meals,3,79,2,158
+2026-05-11,1,5,Longsilog,Meals,3,79,1,79
+2026-05-11,1,5,Hotsilog,Meals,3,79,1,79
+2026-05-11,1,5,Tapsilog,Meals,3,89,1,89
+2026-05-11,1,5,Spamsilog,Meals,3,89,2,178
+2026-05-11,1,5,Baconsilog,Meals,3,89,1,89
+2026-05-11,1,5,Seasoned Fries,Snacks,4,69,3,207
+2026-05-11,1,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-11,1,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-11,1,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-11,1,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-11,1,5,Quesadilla Cheese,Snacks,4,109,2,218
+2026-05-12,2,5,Cafe Latte,Coffee,1,79,3,237
+2026-05-12,2,5,Spanish,Coffee,1,89,1,89
+2026-05-12,2,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-12,2,5,Barista Signature,Coffee,1,89,1,89
+2026-05-12,2,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-12,2,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-12,2,5,Caramel Macchiato,Coffee,1,99,1,99
+2026-05-12,2,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-12,2,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-12,2,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-12,2,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-12,2,5,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-12,2,5,Blueberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-12,2,5,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-12,2,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-12,2,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-12,2,5,Beef Bibimbab w/ Egg,Meals,3,149,1,149
+2026-05-12,2,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-12,2,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-12,2,5,Tocilog,Meals,3,79,1,79
+2026-05-12,2,5,Longsilog,Meals,3,79,1,79
+2026-05-12,2,5,Hotsilog,Meals,3,79,1,79
+2026-05-12,2,5,Tapsilog,Meals,3,89,1,89
+2026-05-12,2,5,Spamsilog,Meals,3,89,1,89
+2026-05-12,2,5,Baconsilog,Meals,3,89,1,89
+2026-05-12,2,5,Seasoned Fries,Snacks,4,69,2,138
+2026-05-12,2,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-12,2,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-12,2,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-13,3,5,Cafe Latte,Coffee,1,79,1,79
+2026-05-13,3,5,Spanish,Coffee,1,89,1,89
+2026-05-13,3,5,Sea Salt Latte,Coffee,1,89,1,89
+2026-05-13,3,5,Barista Signature,Coffee,1,89,1,89
+2026-05-13,3,5,Salted Caramel Latte,Coffee,1,99,1,99
+2026-05-13,3,5,Caffe Mocha,Coffee,1,99,1,99
+2026-05-13,3,5,Caramel Macchiato,Coffee,1,99,2,198
+2026-05-13,3,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-13,3,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-13,3,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-13,3,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-13,3,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-13,3,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-13,3,5,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-13,3,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-13,3,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-13,3,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-13,3,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-13,3,5,Tocilog,Meals,3,79,2,158
+2026-05-13,3,5,Longsilog,Meals,3,79,1,79
+2026-05-13,3,5,Hotsilog,Meals,3,79,1,79
+2026-05-13,3,5,Tapsilog,Meals,3,89,1,89
+2026-05-13,3,5,Spamsilog,Meals,3,89,1,89
+2026-05-13,3,5,Baconsilog,Meals,3,89,1,89
+2026-05-13,3,5,Seasoned Fries,Snacks,4,69,2,138
+2026-05-13,3,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-13,3,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-13,3,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-14,4,5,Cafe Latte,Coffee,1,79,3,237
+2026-05-14,4,5,Spanish,Coffee,1,89,2,178
+2026-05-14,4,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-14,4,5,Barista Signature,Coffee,1,89,1,89
+2026-05-14,4,5,Salted Caramel Latte,Coffee,1,99,1,99
+2026-05-14,4,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-14,4,5,Caramel Macchiato,Coffee,1,99,1,99
+2026-05-14,4,5,Matcha Latte,Coffee,1,119,2,238
+2026-05-14,4,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-14,4,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,2,138
+2026-05-14,4,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-14,4,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-14,4,5,Blueberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-14,4,5,Chocolate Milk,Non-Coffee & Tea,2,79,3,237
+2026-05-14,4,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-14,4,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-14,4,5,4pcs Chix Winglet,Meals,3,119,2,238
+2026-05-14,4,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-14,4,5,Tocilog,Meals,3,79,1,79
+2026-05-14,4,5,Longsilog,Meals,3,79,2,158
+2026-05-14,4,5,Hotsilog,Meals,3,79,1,79
+2026-05-14,4,5,Tapsilog,Meals,3,89,1,89
+2026-05-14,4,5,Spamsilog,Meals,3,89,1,89
+2026-05-14,4,5,Baconsilog,Meals,3,89,1,89
+2026-05-14,4,5,Seasoned Fries,Snacks,4,69,2,138
+2026-05-14,4,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-14,4,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-14,4,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-14,4,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-14,4,5,Quesadilla Cheese,Snacks,4,109,4,436
+2026-05-15,5,5,Cafe Latte,Coffee,1,79,3,237
+2026-05-15,5,5,Spanish,Coffee,1,89,1,89
+2026-05-15,5,5,Sea Salt Latte,Coffee,1,89,1,89
+2026-05-15,5,5,Barista Signature,Coffee,1,89,1,89
+2026-05-15,5,5,Salted Caramel Latte,Coffee,1,99,1,99
+2026-05-15,5,5,Caffe Mocha,Coffee,1,99,1,99
+2026-05-15,5,5,Caramel Macchiato,Coffee,1,99,1,99
+2026-05-15,5,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-15,5,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-15,5,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-15,5,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-15,5,5,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-15,5,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-15,5,5,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-15,5,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-15,5,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-15,5,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-15,5,5,Tocilog,Meals,3,79,1,79
+2026-05-15,5,5,Longsilog,Meals,3,79,2,158
+2026-05-15,5,5,Hotsilog,Meals,3,79,1,79
+2026-05-15,5,5,Tapsilog,Meals,3,89,1,89
+2026-05-15,5,5,Spamsilog,Meals,3,89,1,89
+2026-05-15,5,5,Baconsilog,Meals,3,89,1,89
+2026-05-15,5,5,Seasoned Fries,Snacks,4,69,2,138
+2026-05-15,5,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-15,5,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-15,5,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-15,5,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-15,5,5,Quesadilla Cheese,Snacks,4,109,1,109
+2026-05-16,6,5,Cafe Latte,Coffee,1,79,1,79
+2026-05-16,6,5,Spanish,Coffee,1,89,1,89
+2026-05-16,6,5,Sea Salt Latte,Coffee,1,89,1,89
+2026-05-16,6,5,Salted Caramel Latte,Coffee,1,99,1,99
+2026-05-16,6,5,Caffe Mocha,Coffee,1,99,1,99
+2026-05-16,6,5,Caramel Macchiato,Coffee,1,99,1,99
+2026-05-16,6,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-16,6,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-16,6,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-16,6,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-16,6,5,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-16,6,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-16,6,5,Tocilog,Meals,3,79,1,79
+2026-05-16,6,5,Longsilog,Meals,3,79,1,79
+2026-05-16,6,5,Hotsilog,Meals,3,79,1,79
+2026-05-16,6,5,Tapsilog,Meals,3,89,1,89
+2026-05-16,6,5,Seasoned Fries,Snacks,4,69,1,69
+2026-05-16,6,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-16,6,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-16,6,5,Quesadilla Cheese,Snacks,4,109,2,218
+2026-05-17,7,5,Cafe Latte,Coffee,1,79,2,158
+2026-05-17,7,5,Spanish,Coffee,1,89,1,89
+2026-05-17,7,5,Sea Salt Latte,Coffee,1,89,1,89
+2026-05-17,7,5,Barista Signature,Coffee,1,89,1,89
+2026-05-17,7,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-17,7,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-17,7,5,Caramel Macchiato,Coffee,1,99,1,99
+2026-05-17,7,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-17,7,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-17,7,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-17,7,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-17,7,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-17,7,5,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-17,7,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-17,7,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-17,7,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-17,7,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-17,7,5,Tocilog,Meals,3,79,2,158
+2026-05-17,7,5,Longsilog,Meals,3,79,1,79
+2026-05-17,7,5,Hotsilog,Meals,3,79,1,79
+2026-05-17,7,5,Tapsilog,Meals,3,89,1,89
+2026-05-17,7,5,Spamsilog,Meals,3,89,1,89
+2026-05-17,7,5,Baconsilog,Meals,3,89,1,89
+2026-05-17,7,5,Seasoned Fries,Snacks,4,69,2,138
+2026-05-17,7,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-17,7,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-17,7,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-17,7,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-18,1,5,Cafe Latte,Coffee,1,79,2,158
+2026-05-18,1,5,Spanish,Coffee,1,89,2,178
+2026-05-18,1,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-18,1,5,Barista Signature,Coffee,1,89,2,178
+2026-05-18,1,5,Salted Caramel Latte,Coffee,1,99,1,99
+2026-05-18,1,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-18,1,5,Caramel Macchiato,Coffee,1,99,2,198
+2026-05-18,1,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-18,1,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-18,1,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,2,138
+2026-05-18,1,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-18,1,5,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-18,1,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-18,1,5,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-18,1,5,Kimchi Rice w/ Egg,Meals,3,99,2,198
+2026-05-18,1,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-18,1,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-18,1,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-18,1,5,Tocilog,Meals,3,79,2,158
+2026-05-18,1,5,Longsilog,Meals,3,79,2,158
+2026-05-18,1,5,Hotsilog,Meals,3,79,2,158
+2026-05-18,1,5,Tapsilog,Meals,3,89,1,89
+2026-05-18,1,5,Spamsilog,Meals,3,89,1,89
+2026-05-18,1,5,Baconsilog,Meals,3,89,1,89
+2026-05-18,1,5,Seasoned Fries,Snacks,4,69,3,207
+2026-05-18,1,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-18,1,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-18,1,5,Choco Chip Pancake,Snacks,4,69,2,138
+2026-05-19,2,5,Cafe Latte,Coffee,1,79,1,79
+2026-05-19,2,5,Seasoned Fries,Snacks,4,69,1,69
+2026-05-19,2,5,Quesadilla Cheese,Snacks,4,109,6,654
+2026-05-20,3,5,Cafe Latte,Coffee,1,79,5,395
+2026-05-20,3,5,Spanish,Coffee,1,89,3,267
+2026-05-20,3,5,Sea Salt Latte,Coffee,1,89,3,267
+2026-05-20,3,5,Barista Signature,Coffee,1,89,2,178
+2026-05-20,3,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-20,3,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-20,3,5,Caramel Macchiato,Coffee,1,99,3,297
+2026-05-20,3,5,Matcha Latte,Coffee,1,119,2,238
+2026-05-20,3,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-20,3,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,3,207
+2026-05-20,3,5,Citron & Ginger,Non-Coffee & Tea,2,69,3,207
+2026-05-20,3,5,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-20,3,5,Blueberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-20,3,5,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-20,3,5,Kimchi Rice w/ Egg,Meals,3,99,3,297
+2026-05-20,3,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-20,3,5,Beef Bibimbab w/ Egg,Meals,3,149,1,149
+2026-05-20,3,5,4pcs Chix Winglet,Meals,3,119,2,238
+2026-05-20,3,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-20,3,5,Tocilog,Meals,3,79,4,316
+2026-05-20,3,5,Longsilog,Meals,3,79,3,237
+2026-05-20,3,5,Hotsilog,Meals,3,79,3,237
+2026-05-20,3,5,Tapsilog,Meals,3,89,3,267
+2026-05-20,3,5,Spamsilog,Meals,3,89,2,178
+2026-05-20,3,5,Baconsilog,Meals,3,89,1,89
+2026-05-20,3,5,Seasoned Fries,Snacks,4,69,5,345
+2026-05-20,3,5,Cheesy Beef Fries,Snacks,4,109,2,218
+2026-05-20,3,5,Beefy Nacho Chips,Snacks,4,109,2,218
+2026-05-20,3,5,Choco Chip Pancake,Snacks,4,69,3,207
+2026-05-20,3,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-21,4,5,Cafe Latte,Coffee,1,79,4,316
+2026-05-21,4,5,Spanish,Coffee,1,89,2,178
+2026-05-21,4,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-21,4,5,Barista Signature,Coffee,1,89,1,89
+2026-05-21,4,5,Salted Caramel Latte,Coffee,1,99,3,297
+2026-05-21,4,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-21,4,5,Caramel Macchiato,Coffee,1,99,2,198
+2026-05-21,4,5,Matcha Latte,Coffee,1,119,2,238
+2026-05-21,4,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-21,4,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,2,138
+2026-05-21,4,5,Citron & Ginger,Non-Coffee & Tea,2,69,2,138
+2026-05-21,4,5,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-21,4,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-21,4,5,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-21,4,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-21,4,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-21,4,5,Beef Bibimbab w/ Egg,Meals,3,149,1,149
+2026-05-21,4,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-21,4,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-21,4,5,Tocilog,Meals,3,79,2,158
+2026-05-21,4,5,Longsilog,Meals,3,79,2,158
+2026-05-21,4,5,Hotsilog,Meals,3,79,2,158
+2026-05-21,4,5,Tapsilog,Meals,3,89,2,178
+2026-05-21,4,5,Spamsilog,Meals,3,89,1,89
+2026-05-21,4,5,Baconsilog,Meals,3,89,1,89
+2026-05-21,4,5,Seasoned Fries,Snacks,4,69,2,138
+2026-05-21,4,5,Cheesy Beef Fries,Snacks,4,109,2,218
+2026-05-21,4,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-21,4,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-21,4,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-21,4,5,Quesadilla Cheese,Snacks,4,109,1,109
+2026-05-22,5,5,Cafe Latte,Coffee,1,79,4,316
+2026-05-22,5,5,Spanish,Coffee,1,89,2,178
+2026-05-22,5,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-22,5,5,Barista Signature,Coffee,1,89,2,178
+2026-05-22,5,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-22,5,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-22,5,5,Caramel Macchiato,Coffee,1,99,2,198
+2026-05-22,5,5,Matcha Latte,Coffee,1,119,2,238
+2026-05-22,5,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-22,5,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,3,207
+2026-05-22,5,5,Citron & Ginger,Non-Coffee & Tea,2,69,2,138
+2026-05-22,5,5,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-22,5,5,Blueberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-22,5,5,Chocolate Milk,Non-Coffee & Tea,2,79,3,237
+2026-05-22,5,5,Kimchi Rice w/ Egg,Meals,3,99,2,198
+2026-05-22,5,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-22,5,5,Beef Bibimbab w/ Egg,Meals,3,149,1,149
+2026-05-22,5,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-22,5,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-22,5,5,Tocilog,Meals,3,79,3,237
+2026-05-22,5,5,Longsilog,Meals,3,79,2,158
+2026-05-22,5,5,Hotsilog,Meals,3,79,1,79
+2026-05-22,5,5,Tapsilog,Meals,3,89,1,89
+2026-05-22,5,5,Spamsilog,Meals,3,89,1,89
+2026-05-22,5,5,Baconsilog,Meals,3,89,1,89
+2026-05-22,5,5,Seasoned Fries,Snacks,4,69,3,207
+2026-05-22,5,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-22,5,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-22,5,5,Choco Chip Pancake,Snacks,4,69,2,138
+2026-05-22,5,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-23,6,5,Cafe Latte,Coffee,1,79,1,79
+2026-05-23,6,5,Spanish,Coffee,1,89,1,89
+2026-05-23,6,5,Sea Salt Latte,Coffee,1,89,1,89
+2026-05-23,6,5,Barista Signature,Coffee,1,89,1,89
+2026-05-23,6,5,Salted Caramel Latte,Coffee,1,99,1,99
+2026-05-23,6,5,Caffe Mocha,Coffee,1,99,1,99
+2026-05-23,6,5,Caramel Macchiato,Coffee,1,99,1,99
+2026-05-23,6,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-23,6,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-23,6,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-23,6,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-23,6,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-23,6,5,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-23,6,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-23,6,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-23,6,5,Tocilog,Meals,3,79,1,79
+2026-05-23,6,5,Longsilog,Meals,3,79,1,79
+2026-05-23,6,5,Hotsilog,Meals,3,79,1,79
+2026-05-23,6,5,Tapsilog,Meals,3,89,1,89
+2026-05-23,6,5,Seasoned Fries,Snacks,4,69,1,69
+2026-05-23,6,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-24,7,5,Quesadilla Cheese,Snacks,4,109,3,327
+2026-05-25,1,5,Cafe Latte,Coffee,1,79,3,237
+2026-05-25,1,5,Spanish,Coffee,1,89,2,178
+2026-05-25,1,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-25,1,5,Barista Signature,Coffee,1,89,1,89
+2026-05-25,1,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-25,1,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-25,1,5,Caramel Macchiato,Coffee,1,99,2,198
+2026-05-25,1,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-25,1,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-25,1,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,2,138
+2026-05-25,1,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-25,1,5,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-25,1,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-25,1,5,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-25,1,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-25,1,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-25,1,5,4pcs Chix Winglet,Meals,3,119,2,238
+2026-05-25,1,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-25,1,5,Tocilog,Meals,3,79,1,79
+2026-05-25,1,5,Longsilog,Meals,3,79,1,79
+2026-05-25,1,5,Hotsilog,Meals,3,79,1,79
+2026-05-25,1,5,Tapsilog,Meals,3,89,1,89
+2026-05-25,1,5,Spamsilog,Meals,3,89,1,89
+2026-05-25,1,5,Baconsilog,Meals,3,89,1,89
+2026-05-25,1,5,Seasoned Fries,Snacks,4,69,3,207
+2026-05-25,1,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-25,1,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-25,1,5,Choco Chip Pancake,Snacks,4,69,2,138
+2026-05-25,1,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-25,1,5,Quesadilla Cheese,Snacks,4,109,2,218
+2026-05-27,3,5,Cafe Latte,Coffee,1,79,2,158
+2026-05-27,3,5,Spanish,Coffee,1,89,1,89
+2026-05-27,3,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-27,3,5,Barista Signature,Coffee,1,89,1,89
+2026-05-27,3,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-27,3,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-27,3,5,Caramel Macchiato,Coffee,1,99,2,198
+2026-05-27,3,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-27,3,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-27,3,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,2,138
+2026-05-27,3,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-27,3,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-27,3,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-27,3,5,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-27,3,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-27,3,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-27,3,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-27,3,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-27,3,5,Tocilog,Meals,3,79,1,79
+2026-05-27,3,5,Longsilog,Meals,3,79,2,158
+2026-05-27,3,5,Hotsilog,Meals,3,79,1,79
+2026-05-27,3,5,Tapsilog,Meals,3,89,1,89
+2026-05-27,3,5,Spamsilog,Meals,3,89,1,89
+2026-05-27,3,5,Baconsilog,Meals,3,89,1,89
+2026-05-27,3,5,Seasoned Fries,Snacks,4,69,3,207
+2026-05-27,3,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-27,3,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-27,3,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-27,3,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-27,3,5,Quesadilla Cheese,Snacks,4,109,3,327
+2026-05-28,4,5,Cafe Latte,Coffee,1,79,2,158
+2026-05-28,4,5,Spanish,Coffee,1,89,1,89
+2026-05-28,4,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-28,4,5,Barista Signature,Coffee,1,89,1,89
+2026-05-28,4,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-28,4,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-28,4,5,Caramel Macchiato,Coffee,1,99,1,99
+2026-05-28,4,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-28,4,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-28,4,5,Citron & Ginger,Non-Coffee & Tea,2,69,2,138
+2026-05-28,4,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-28,4,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-28,4,5,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-28,4,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-28,4,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-28,4,5,Beef Bibimbab w/ Egg,Meals,3,149,1,149
+2026-05-28,4,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-28,4,5,Tocilog,Meals,3,79,1,79
+2026-05-28,4,5,Longsilog,Meals,3,79,1,79
+2026-05-28,4,5,Hotsilog,Meals,3,79,1,79
+2026-05-28,4,5,Tapsilog,Meals,3,89,1,89
+2026-05-28,4,5,Spamsilog,Meals,3,89,1,89
+2026-05-28,4,5,Baconsilog,Meals,3,89,1,89
+2026-05-28,4,5,Seasoned Fries,Snacks,4,69,2,138
+2026-05-28,4,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-28,4,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-28,4,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-28,4,5,Quesadilla Cheese,Snacks,4,109,1,109
+2026-05-29,5,5,Cafe Latte,Coffee,1,79,2,158
+2026-05-29,5,5,Spanish,Coffee,1,89,1,89
+2026-05-29,5,5,Sea Salt Latte,Coffee,1,89,1,89
+2026-05-29,5,5,Barista Signature,Coffee,1,89,1,89
+2026-05-29,5,5,Salted Caramel Latte,Coffee,1,99,1,99
+2026-05-29,5,5,Caffe Mocha,Coffee,1,99,1,99
+2026-05-29,5,5,Caramel Macchiato,Coffee,1,99,1,99
+2026-05-29,5,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-29,5,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-29,5,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-29,5,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-29,5,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-29,5,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-29,5,5,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-29,5,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-29,5,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-29,5,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-29,5,5,Tocilog,Meals,3,79,1,79
+2026-05-29,5,5,Longsilog,Meals,3,79,1,79
+2026-05-29,5,5,Hotsilog,Meals,3,79,1,79
+2026-05-29,5,5,Tapsilog,Meals,3,89,1,89
+2026-05-29,5,5,Spamsilog,Meals,3,89,1,89
+2026-05-29,5,5,Baconsilog,Meals,3,89,1,89
+2026-05-29,5,5,Seasoned Fries,Snacks,4,69,2,138
+2026-05-29,5,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-29,5,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-29,5,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-30,6,5,Cafe Latte,Coffee,1,79,3,237
+2026-05-30,6,5,Spanish,Coffee,1,89,1,89
+2026-05-30,6,5,Sea Salt Latte,Coffee,1,89,2,178
+2026-05-30,6,5,Barista Signature,Coffee,1,89,2,178
+2026-05-30,6,5,Salted Caramel Latte,Coffee,1,99,2,198
+2026-05-30,6,5,Caffe Mocha,Coffee,1,99,2,198
+2026-05-30,6,5,Caramel Macchiato,Coffee,1,99,2,198
+2026-05-30,6,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-30,6,5,Strawberry Matcha,Coffee,1,129,1,129
+2026-05-30,6,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,2,138
+2026-05-30,6,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-30,6,5,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-30,6,5,Blueberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-05-30,6,5,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-30,6,5,Kimchi Rice w/ Egg,Meals,3,99,2,198
+2026-05-30,6,5,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-05-30,6,5,Beef Bibimbab w/ Egg,Meals,3,149,1,149
+2026-05-30,6,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-30,6,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-30,6,5,Tocilog,Meals,3,79,1,79
+2026-05-30,6,5,Longsilog,Meals,3,79,2,158
+2026-05-30,6,5,Hotsilog,Meals,3,79,1,79
+2026-05-30,6,5,Tapsilog,Meals,3,89,1,89
+2026-05-30,6,5,Spamsilog,Meals,3,89,1,89
+2026-05-30,6,5,Baconsilog,Meals,3,89,1,89
+2026-05-30,6,5,Seasoned Fries,Snacks,4,69,3,207
+2026-05-30,6,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-30,6,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-30,6,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-30,6,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-31,7,5,Cafe Latte,Coffee,1,79,1,79
+2026-05-31,7,5,Spanish,Coffee,1,89,1,89
+2026-05-31,7,5,Sea Salt Latte,Coffee,1,89,1,89
+2026-05-31,7,5,Barista Signature,Coffee,1,89,1,89
+2026-05-31,7,5,Salted Caramel Latte,Coffee,1,99,1,99
+2026-05-31,7,5,Caffe Mocha,Coffee,1,99,1,99
+2026-05-31,7,5,Caramel Macchiato,Coffee,1,99,1,99
+2026-05-31,7,5,Matcha Latte,Coffee,1,119,1,119
+2026-05-31,7,5,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-05-31,7,5,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-05-31,7,5,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-31,7,5,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-31,7,5,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-05-31,7,5,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-05-31,7,5,4pcs Chix Winglet,Meals,3,119,1,119
+2026-05-31,7,5,6pcs Chix Winglet,Meals,3,149,1,149
+2026-05-31,7,5,Tocilog,Meals,3,79,1,79
+2026-05-31,7,5,Longsilog,Meals,3,79,1,79
+2026-05-31,7,5,Hotsilog,Meals,3,79,1,79
+2026-05-31,7,5,Tapsilog,Meals,3,89,1,89
+2026-05-31,7,5,Spamsilog,Meals,3,89,1,89
+2026-05-31,7,5,Baconsilog,Meals,3,89,1,89
+2026-05-31,7,5,Seasoned Fries,Snacks,4,69,2,138
+2026-05-31,7,5,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-05-31,7,5,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-05-31,7,5,Choco Chip Pancake,Snacks,4,69,1,69
+2026-05-31,7,5,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-05-31,7,5,Quesadilla Cheese,Snacks,4,109,2,218
+2026-06-01,1,6,Cafe Latte,Coffee,1,79,2,158
+2026-06-01,1,6,Spanish,Coffee,1,89,1,89
+2026-06-01,1,6,Sea Salt Latte,Coffee,1,89,1,89
+2026-06-01,1,6,Barista Signature,Coffee,1,89,1,89
+2026-06-01,1,6,Salted Caramel Latte,Coffee,1,99,1,99
+2026-06-01,1,6,Caffe Mocha,Coffee,1,99,1,99
+2026-06-01,1,6,Caramel Macchiato,Coffee,1,99,1,99
+2026-06-01,1,6,Matcha Latte,Coffee,1,119,1,119
+2026-06-01,1,6,Strawberry Matcha,Coffee,1,129,1,129
+2026-06-01,1,6,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-06-01,1,6,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-06-01,1,6,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-01,1,6,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-01,1,6,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-01,1,6,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-06-01,1,6,4pcs Chix Winglet,Meals,3,119,1,119
+2026-06-01,1,6,6pcs Chix Winglet,Meals,3,149,1,149
+2026-06-01,1,6,Tocilog,Meals,3,79,1,79
+2026-06-01,1,6,Longsilog,Meals,3,79,1,79
+2026-06-01,1,6,Hotsilog,Meals,3,79,1,79
+2026-06-01,1,6,Tapsilog,Meals,3,89,1,89
+2026-06-01,1,6,Spamsilog,Meals,3,89,1,89
+2026-06-01,1,6,Baconsilog,Meals,3,89,1,89
+2026-06-01,1,6,Seasoned Fries,Snacks,4,69,2,138
+2026-06-01,1,6,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-06-01,1,6,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-06-01,1,6,Choco Chip Pancake,Snacks,4,69,1,69
+2026-06-01,1,6,Quesadilla Cheese,Snacks,4,109,3,327
+2026-06-02,2,6,Cafe Latte,Coffee,1,79,1,79
+2026-06-02,2,6,Sea Salt Latte,Coffee,1,89,1,89
+2026-06-02,2,6,Salted Caramel Latte,Coffee,1,99,1,99
+2026-06-02,2,6,Caffe Mocha,Coffee,1,99,1,99
+2026-06-02,2,6,Caramel Macchiato,Coffee,1,99,1,99
+2026-06-02,2,6,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-06-02,2,6,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-02,2,6,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-02,2,6,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-02,2,6,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-06-02,2,6,4pcs Chix Winglet,Meals,3,119,1,119
+2026-06-02,2,6,Tocilog,Meals,3,79,1,79
+2026-06-02,2,6,Longsilog,Meals,3,79,1,79
+2026-06-02,2,6,Seasoned Fries,Snacks,4,69,1,69
+2026-06-02,2,6,Quesadilla Cheese,Snacks,4,109,2,218
+2026-06-03,3,6,Cafe Latte,Coffee,1,79,1,79
+2026-06-03,3,6,Spanish,Coffee,1,89,1,89
+2026-06-03,3,6,Sea Salt Latte,Coffee,1,89,1,89
+2026-06-03,3,6,Barista Signature,Coffee,1,89,1,89
+2026-06-03,3,6,Salted Caramel Latte,Coffee,1,99,1,99
+2026-06-03,3,6,Caffe Mocha,Coffee,1,99,1,99
+2026-06-03,3,6,Caramel Macchiato,Coffee,1,99,1,99
+2026-06-03,3,6,Matcha Latte,Coffee,1,119,1,119
+2026-06-03,3,6,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-06-03,3,6,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-06-03,3,6,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-03,3,6,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-03,3,6,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-03,3,6,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-06-03,3,6,4pcs Chix Winglet,Meals,3,119,1,119
+2026-06-03,3,6,Tocilog,Meals,3,79,1,79
+2026-06-03,3,6,Longsilog,Meals,3,79,1,79
+2026-06-03,3,6,Hotsilog,Meals,3,79,1,79
+2026-06-03,3,6,Tapsilog,Meals,3,89,1,89
+2026-06-03,3,6,Spamsilog,Meals,3,89,1,89
+2026-06-03,3,6,Seasoned Fries,Snacks,4,69,1,69
+2026-06-03,3,6,Choco Chip Pancake,Snacks,4,69,1,69
+2026-06-04,4,6,Cafe Latte,Coffee,1,79,2,158
+2026-06-04,4,6,Spanish,Coffee,1,89,3,267
+2026-06-04,4,6,Sea Salt Latte,Coffee,1,89,3,267
+2026-06-04,4,6,Barista Signature,Coffee,1,89,2,178
+2026-06-04,4,6,Salted Caramel Latte,Coffee,1,99,3,297
+2026-06-04,4,6,Caffe Mocha,Coffee,1,99,3,297
+2026-06-04,4,6,Caramel Macchiato,Coffee,1,99,3,297
+2026-06-04,4,6,Matcha Latte,Coffee,1,119,1,119
+2026-06-04,4,6,Strawberry Matcha,Coffee,1,129,1,129
+2026-06-04,4,6,Lemon & Pomegranate,Non-Coffee & Tea,2,69,3,207
+2026-06-04,4,6,Citron & Ginger,Non-Coffee & Tea,2,69,2,138
+2026-06-04,4,6,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-06-04,4,6,Blueberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-06-04,4,6,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-06-04,4,6,Kimchi Rice w/ Egg,Meals,3,99,2,198
+2026-06-04,4,6,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-06-04,4,6,Beef Bibimbab w/ Egg,Meals,3,149,1,149
+2026-06-04,4,6,4pcs Chix Winglet,Meals,3,119,1,119
+2026-06-04,4,6,6pcs Chix Winglet,Meals,3,149,1,149
+2026-06-04,4,6,Tocilog,Meals,3,79,2,158
+2026-06-04,4,6,Longsilog,Meals,3,79,2,158
+2026-06-04,4,6,Hotsilog,Meals,3,79,2,158
+2026-06-04,4,6,Tapsilog,Meals,3,89,2,178
+2026-06-04,4,6,Spamsilog,Meals,3,89,2,178
+2026-06-04,4,6,Baconsilog,Meals,3,89,1,89
+2026-06-04,4,6,Seasoned Fries,Snacks,4,69,4,276
+2026-06-04,4,6,Cheesy Beef Fries,Snacks,4,109,2,218
+2026-06-04,4,6,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-06-04,4,6,Choco Chip Pancake,Snacks,4,69,2,138
+2026-06-04,4,6,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-06-05,5,6,Cafe Latte,Coffee,1,79,1,79
+2026-06-05,5,6,Spanish,Coffee,1,89,1,89
+2026-06-05,5,6,Sea Salt Latte,Coffee,1,89,1,89
+2026-06-05,5,6,Barista Signature,Coffee,1,89,1,89
+2026-06-05,5,6,Salted Caramel Latte,Coffee,1,99,2,198
+2026-06-05,5,6,Caffe Mocha,Coffee,1,99,1,99
+2026-06-05,5,6,Caramel Macchiato,Coffee,1,99,1,99
+2026-06-05,5,6,Matcha Latte,Coffee,1,119,1,119
+2026-06-05,5,6,Lemon & Pomegranate,Non-Coffee & Tea,2,69,1,69
+2026-06-05,5,6,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-06-05,5,6,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-05,5,6,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-05,5,6,Chocolate Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-05,5,6,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-06-05,5,6,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-06-05,5,6,4pcs Chix Winglet,Meals,3,119,1,119
+2026-06-05,5,6,Tocilog,Meals,3,79,1,79
+2026-06-05,5,6,Longsilog,Meals,3,79,1,79
+2026-06-05,5,6,Hotsilog,Meals,3,79,1,79
+2026-06-05,5,6,Tapsilog,Meals,3,89,1,89
+2026-06-05,5,6,Spamsilog,Meals,3,89,1,89
+2026-06-05,5,6,Baconsilog,Meals,3,89,1,89
+2026-06-05,5,6,Seasoned Fries,Snacks,4,69,1,69
+2026-06-05,5,6,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-06-05,5,6,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-06-05,5,6,Choco Chip Pancake,Snacks,4,69,1,69
+2026-06-05,5,6,Quesadilla Cheese,Snacks,4,109,1,109
+2026-06-06,6,6,Cafe Latte,Coffee,1,79,4,316
+2026-06-06,6,6,Spanish,Coffee,1,89,2,178
+2026-06-06,6,6,Sea Salt Latte,Coffee,1,89,3,267
+2026-06-06,6,6,Barista Signature,Coffee,1,89,2,178
+2026-06-06,6,6,Salted Caramel Latte,Coffee,1,99,2,198
+2026-06-06,6,6,Caffe Mocha,Coffee,1,99,3,297
+2026-06-06,6,6,Caramel Macchiato,Coffee,1,99,3,297
+2026-06-06,6,6,Matcha Latte,Coffee,1,119,1,119
+2026-06-06,6,6,Strawberry Matcha,Coffee,1,129,1,129
+2026-06-06,6,6,Lemon & Pomegranate,Non-Coffee & Tea,2,69,2,138
+2026-06-06,6,6,Citron & Ginger,Non-Coffee & Tea,2,69,2,138
+2026-06-06,6,6,Strawberry Milk,Non-Coffee & Tea,2,79,2,158
+2026-06-06,6,6,Blueberry Milk,Non-Coffee & Tea,2,79,3,237
+2026-06-06,6,6,Chocolate Milk,Non-Coffee & Tea,2,79,3,237
+2026-06-06,6,6,Kimchi Rice w/ Egg,Meals,3,99,2,198
+2026-06-06,6,6,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-06-06,6,6,Beef Bibimbab w/ Egg,Meals,3,149,1,149
+2026-06-06,6,6,4pcs Chix Winglet,Meals,3,119,2,238
+2026-06-06,6,6,6pcs Chix Winglet,Meals,3,149,1,149
+2026-06-06,6,6,Tocilog,Meals,3,79,3,237
+2026-06-06,6,6,Longsilog,Meals,3,79,2,158
+2026-06-06,6,6,Hotsilog,Meals,3,79,1,79
+2026-06-06,6,6,Tapsilog,Meals,3,89,2,178
+2026-06-06,6,6,Spamsilog,Meals,3,89,2,178
+2026-06-06,6,6,Baconsilog,Meals,3,89,1,89
+2026-06-06,6,6,Seasoned Fries,Snacks,4,69,3,207
+2026-06-06,6,6,Cheesy Beef Fries,Snacks,4,109,2,218
+2026-06-06,6,6,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-06-06,6,6,Choco Chip Pancake,Snacks,4,69,2,138
+2026-06-06,6,6,Quesadilla Beef & Tuna,Snacks,4,119,1,119
+2026-06-07,7,6,Cafe Latte,Coffee,1,79,2,158
+2026-06-07,7,6,Spanish,Coffee,1,89,1,89
+2026-06-07,7,6,Sea Salt Latte,Coffee,1,89,1,89
+2026-06-07,7,6,Barista Signature,Coffee,1,89,1,89
+2026-06-07,7,6,Salted Caramel Latte,Coffee,1,99,2,198
+2026-06-07,7,6,Caffe Mocha,Coffee,1,99,1,99
+2026-06-07,7,6,Caramel Macchiato,Coffee,1,99,2,198
+2026-06-07,7,6,Matcha Latte,Coffee,1,119,1,119
+2026-06-07,7,6,Strawberry Matcha,Coffee,1,129,1,129
+2026-06-07,7,6,Lemon & Pomegranate,Non-Coffee & Tea,2,69,2,138
+2026-06-07,7,6,Citron & Ginger,Non-Coffee & Tea,2,69,1,69
+2026-06-07,7,6,Strawberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-07,7,6,Blueberry Milk,Non-Coffee & Tea,2,79,1,79
+2026-06-07,7,6,Chocolate Milk,Non-Coffee & Tea,2,79,2,158
+2026-06-07,7,6,Kimchi Rice w/ Egg,Meals,3,99,1,99
+2026-06-07,7,6,Pork Belly Kimchi Rice,Meals,3,149,1,149
+2026-06-07,7,6,4pcs Chix Winglet,Meals,3,119,1,119
+2026-06-07,7,6,6pcs Chix Winglet,Meals,3,149,1,149
+2026-06-07,7,6,Tocilog,Meals,3,79,2,158
+2026-06-07,7,6,Longsilog,Meals,3,79,2,158
+2026-06-07,7,6,Hotsilog,Meals,3,79,1,79
+2026-06-07,7,6,Tapsilog,Meals,3,89,1,89
+2026-06-07,7,6,Spamsilog,Meals,3,89,1,89
+2026-06-07,7,6,Baconsilog,Meals,3,89,1,89
+2026-06-07,7,6,Seasoned Fries,Snacks,4,69,2,138
+2026-06-07,7,6,Cheesy Beef Fries,Snacks,4,109,1,109
+2026-06-07,7,6,Beefy Nacho Chips,Snacks,4,109,1,109
+2026-06-07,7,6,Choco Chip Pancake,Snacks,4,69,1,69
+2026-06-07,7,6,Quesadilla Beef & Tuna,Snacks,4,119,1,119

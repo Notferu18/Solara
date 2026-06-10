@@ -4,23 +4,28 @@ import api from '../../services/api';
 
 export default function POSInterface() {
   const { user, logout } = useAuth();
-  const [menuItems,   setMenuItems]   = useState([]);
-  const [categories,  setCategories]  = useState([]);
+  const [menuItems,      setMenuItems]      = useState([]);
+  const [categories,     setCategories]     = useState([]);
   const [activeCategory, setActiveCategory] = useState('All');
-  const [cart,        setCart]        = useState([]);
-  const [loading,     setLoading]     = useState(true);
-  const [submitting,  setSubmitting]  = useState(false);
-  const [success,     setSuccess]     = useState('');
-  const [activeTab,   setActiveTab]   = useState('pos'); // 'pos' | 'orders'
-  const [orders,      setOrders]      = useState([]);
+  const [cart,           setCart]           = useState([]);
+  const [loading,        setLoading]        = useState(true);
+  const [submitting,     setSubmitting]     = useState(false);
+  const [success,        setSuccess]        = useState('');
+  const [activeTab,      setActiveTab]      = useState('pos');
+  const [orders,         setOrders]         = useState([]);
 
   useEffect(() => {
     fetchMenu();
     fetchCategories();
   }, []);
 
+  // ── Auto-refresh orders every 5 sec when on queue tab ──────
   useEffect(() => {
-    if (activeTab === 'orders') fetchOrders();
+    if (activeTab === 'orders') {
+      fetchOrders();
+      const interval = setInterval(fetchOrders, 5000);
+      return () => clearInterval(interval);
+    }
   }, [activeTab]);
 
   const fetchMenu = async () => {
@@ -38,9 +43,10 @@ export default function POSInterface() {
     } catch {}
   };
 
+  // ── Uses queue endpoint ─────────────────────────────────────
   const fetchOrders = async () => {
     try {
-      const res = await api.get('/orders');
+      const res = await api.get('/orders/queue');
       setOrders(res.data);
     } catch {}
   };
@@ -71,7 +77,7 @@ export default function POSInterface() {
     setSubmitting(true);
     try {
       await api.post('/orders', {
-        items: cart.map(c => ({ menu_item_id: c.id, quantity: c.qty })),
+        items:          cart.map(c => ({ menu_item_id: c.id, quantity: c.qty })),
         payment_method: 'Cash',
       });
       setCart([]);
@@ -91,11 +97,11 @@ export default function POSInterface() {
   };
 
   const statusColors = {
-    pending:    'badge-pending',
-    preparing:  'badge-preparing',
-    ready:      'badge-ready',
-    completed:  'badge-completed',
-    cancelled:  'badge-cancelled',
+    pending:   'badge-pending',
+    preparing: 'badge-preparing',
+    ready:     'badge-ready',
+    completed: 'badge-completed',
+    cancelled: 'badge-cancelled',
   };
 
   const nextStatus = {
@@ -115,10 +121,15 @@ export default function POSInterface() {
           <p className="text-solara-cream text-xs italic">Coffee & Blooms</p>
         </div>
         <nav className="flex-1 px-4 py-4 space-y-1">
-          {[{ key: 'pos', icon: '🧾', label: 'New Order' }, { key: 'orders', icon: '📋', label: 'Order Queue' }].map(item => (
+          {[
+            { key: 'pos',    icon: '🧾', label: 'New Order'   },
+            { key: 'orders', icon: '📋', label: 'Order Queue' },
+          ].map(item => (
             <button key={item.key} onClick={() => setActiveTab(item.key)}
               className={`w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 text-sm font-semibold transition-colors
-                ${activeTab === item.key ? 'bg-solara-brown text-white' : 'text-solara-cream hover:bg-solara-brown hover:text-white'}`}>
+                ${activeTab === item.key
+                  ? 'bg-solara-brown text-white'
+                  : 'text-solara-cream hover:bg-solara-brown hover:text-white'}`}>
               <span>{item.icon}</span><span>{item.label}</span>
             </button>
           ))}
@@ -139,22 +150,21 @@ export default function POSInterface() {
           <>
             {/* Menu Grid */}
             <div className="flex-1 flex flex-col overflow-hidden">
-              {/* Topbar */}
               <div className="bg-white border-b border-solara-cream px-6 py-4 sticky top-0 z-10">
                 <h2 className="text-lg font-bold text-solara-dark font-georgia mb-3">🧾 New Order</h2>
-                {/* Category filter */}
                 <div className="flex gap-2 flex-wrap">
                   {categories.map(cat => (
                     <button key={cat.id} onClick={() => setActiveCategory(cat.name)}
                       className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors
-                        ${activeCategory === cat.name ? 'bg-solara-brown text-white' : 'bg-solara-cream text-solara-dark hover:bg-solara-brown hover:text-white'}`}>
+                        ${activeCategory === cat.name
+                          ? 'bg-solara-brown text-white'
+                          : 'bg-solara-cream text-solara-dark hover:bg-solara-brown hover:text-white'}`}>
                       {cat.name}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Items */}
               <div className="flex-1 overflow-y-auto p-6">
                 {loading ? (
                   <div className="text-center text-gray-400 py-12">Loading menu...</div>
@@ -165,12 +175,14 @@ export default function POSInterface() {
                     {filteredItems.map(item => (
                       <button key={item.id} onClick={() => addToCart(item)}
                         disabled={!item.is_available}
-                        className={`card text-left hover:shadow-lg hover:border-solara-brown transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed`}>
+                        className="card text-left hover:shadow-lg hover:border-solara-brown transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed">
                         <div className="text-3xl mb-2">☕</div>
                         <p className="font-bold text-solara-dark text-sm leading-tight">{item.name}</p>
                         <p className="text-xs text-gray-400 mb-2">{item.category?.name}</p>
                         <p className="text-solara-brown font-bold">₱{Number(item.price).toFixed(2)}</p>
-                        {!item.is_available && <p className="text-xs text-red-400 mt-1">Out of stock</p>}
+                        {!item.is_available && (
+                          <p className="text-xs text-red-400 mt-1">Out of stock</p>
+                        )}
                       </button>
                     ))}
                   </div>
@@ -183,7 +195,6 @@ export default function POSInterface() {
               <div className="px-6 py-4 border-b border-solara-cream">
                 <h3 className="font-bold text-solara-dark text-lg">🛒 Order Summary</h3>
               </div>
-
               <div className="flex-1 overflow-y-auto px-6 py-4 space-y-3">
                 {cart.length === 0 ? (
                   <div className="text-center text-gray-400 text-sm py-12">
@@ -207,10 +218,10 @@ export default function POSInterface() {
                   </div>
                 ))}
               </div>
-
-              {/* Total + Submit */}
               <div className="px-6 py-4 border-t border-solara-cream space-y-3">
-                {success && <div className="text-green-600 text-sm font-semibold text-center">{success}</div>}
+                {success && (
+                  <div className="text-green-600 text-sm font-semibold text-center">{success}</div>
+                )}
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-solara-dark">Total</span>
                   <span className="text-xl font-bold text-solara-brown">₱{total.toFixed(2)}</span>
@@ -219,51 +230,86 @@ export default function POSInterface() {
                   className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed">
                   {submitting ? 'Placing Order...' : 'Place Order'}
                 </button>
-                <button onClick={() => setCart([])}
-                  className="btn-secondary w-full text-sm">
+                <button onClick={() => setCart([])} className="btn-secondary w-full text-sm">
                   Clear Cart
                 </button>
               </div>
             </div>
           </>
+
         ) : (
-          /* Order Queue */
+          /* ── Order Queue ─────────────────────────────────── */
           <div className="flex-1 overflow-y-auto p-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-solara-dark font-georgia">📋 Order Queue</h2>
-              <button onClick={fetchOrders} className="btn-secondary text-sm">🔄 Refresh</button>
+              <div>
+                <h2 className="text-xl font-bold text-solara-dark font-georgia">
+                  📋 Order Queue
+                </h2>
+                <p className="text-xs text-gray-400 mt-1">
+                  🔄 Auto-refreshes every 5 seconds
+                </p>
+              </div>
+              <button onClick={fetchOrders} className="btn-secondary text-sm">
+                🔄 Refresh Now
+              </button>
             </div>
+
             {orders.length === 0 ? (
-              <div className="card text-center text-gray-400 py-12">No orders yet</div>
+              <div className="card text-center text-gray-400 py-12">
+                <div className="text-5xl mb-3">📋</div>
+                <p>No active orders</p>
+                <p className="text-xs mt-1">New kiosk orders will appear here automatically</p>
+              </div>
             ) : (
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {orders.map(order => (
-                  <div key={order.id} className="card">
+                  <div key={order.id}
+                    className={`card border-l-4 ${
+                      order.status === 'pending'   ? 'border-yellow-400' :
+                      order.status === 'preparing' ? 'border-blue-400'   :
+                      order.status === 'ready'     ? 'border-green-400'  : 'border-gray-300'
+                    }`}>
                     <div className="flex items-center justify-between mb-3">
                       <div>
-                        <p className="font-bold text-solara-dark">Order #{order.order_number}</p>
-                        <p className="text-xs text-gray-400">{order.customer?.name ?? 'Walk-in'} • {new Date(order.created_at).toLocaleTimeString()}</p>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className={statusColors[order.status]}>{order.status}</span>
-                        {nextStatus[order.status] && (
-                          <button onClick={() => updateStatus(order.id, nextStatus[order.status])}
-                            className="btn-primary text-xs py-1 px-3">
-                            Mark {nextStatus[order.status]}
-                          </button>
+                        {order.queue_number && (
+                          <p className="text-3xl font-bold text-solara-brown font-georgia">
+                            {order.queue_number}
+                          </p>
                         )}
+                        <p className="text-xs text-gray-400">
+                          {order.order_number} • {new Date(order.created_at).toLocaleTimeString()}
+                        </p>
+                        <p className="text-xs text-gray-400">
+                          {order.user ? order.user.name : '🖥️ Kiosk Order'}
+                        </p>
                       </div>
+                      <span className={statusColors[order.status]}>
+                        {order.status}
+                      </span>
                     </div>
-                    <div className="text-sm text-gray-600 space-y-1">
+
+                    <div className="text-sm text-gray-600 space-y-1 mb-3">
                       {order.order_items?.map((oi, i) => (
                         <div key={i} className="flex justify-between">
                           <span>{oi.menu_item?.name} × {oi.quantity}</span>
-                          <span className="text-solara-brown font-semibold">₱{Number(oi.subtotal).toFixed(2)}</span>
+                          <span className="text-solara-brown font-semibold">
+                            ₱{Number(oi.subtotal).toFixed(2)}
+                          </span>
                         </div>
                       ))}
                     </div>
-                    <div className="flex justify-end mt-3 pt-3 border-t border-solara-cream">
-                      <span className="font-bold text-solara-dark">Total: ₱{Number(order.total_amount).toFixed(2)}</span>
+
+                    <div className="flex items-center justify-between pt-3 border-t border-solara-cream">
+                      <span className="font-bold text-solara-dark">
+                        ₱{Number(order.total_amount).toFixed(2)}
+                      </span>
+                      {nextStatus[order.status] && (
+                        <button
+                          onClick={() => updateStatus(order.id, nextStatus[order.status])}
+                          className="btn-primary text-xs py-1 px-4">
+                          Mark {nextStatus[order.status]} →
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}

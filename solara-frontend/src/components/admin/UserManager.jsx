@@ -5,12 +5,18 @@ export default function UserManager() {
   const [users,    setUsers]    = useState([]);
   const [loading,  setLoading]  = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [success,  setSuccess]  = useState('');
   const [form,     setForm]     = useState({ name: '', email: '', password: '', role: 'staff' });
 
   useEffect(() => { fetchUsers(); }, []);
 
   const fetchUsers = async () => {
-    try { const res = await api.get('/users'); setUsers(res.data); } catch {}
+    try {
+      const res = await api.get('/users');
+      setUsers(res.data);
+    } catch (err) {
+      console.error('Failed to fetch users:', err.response?.data);
+    }
     setLoading(false);
   };
 
@@ -20,8 +26,16 @@ export default function UserManager() {
       await api.post('/auth/register', form);
       setShowForm(false);
       setForm({ name: '', email: '', password: '', role: 'staff' });
+      setSuccess('✅ User created successfully!');
+      setTimeout(() => setSuccess(''), 3000);
       fetchUsers();
-    } catch { alert('Failed to create user.'); }
+    } catch (err) {
+      const errors  = err.response?.data?.errors;
+      const message = errors
+        ? Object.values(errors).flat().join('\n')
+        : err.response?.data?.message ?? 'Failed to create user.';
+      alert(message);
+    }
   };
 
   const roleColors = {
@@ -34,10 +48,20 @@ export default function UserManager() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-end">
-        <button onClick={() => setShowForm(true)} className="btn-primary">+ Add Staff</button>
+
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        {success && (
+          <div className="text-green-600 text-sm font-semibold">{success}</div>
+        )}
+        <div className="ml-auto">
+          <button onClick={() => setShowForm(true)} className="btn-primary">
+            + Add Staff
+          </button>
+        </div>
       </div>
 
+      {/* Table */}
       <div className="card p-0 overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-solara-dark text-white">
@@ -49,9 +73,17 @@ export default function UserManager() {
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan={4} className="text-center py-12 text-gray-400">Loading...</td></tr>
+              <tr>
+                <td colSpan={4} className="text-center py-12 text-gray-400">
+                  Loading...
+                </td>
+              </tr>
             ) : users.length === 0 ? (
-              <tr><td colSpan={4} className="text-center py-12 text-gray-400">No users found</td></tr>
+              <tr>
+                <td colSpan={4} className="text-center py-12 text-gray-400">
+                  No users found
+                </td>
+              </tr>
             ) : users.map((u, i) => (
               <tr key={u.id} className={i % 2 === 0 ? 'bg-white' : 'bg-solara-light'}>
                 <td className="px-4 py-3 font-semibold text-solara-dark">{u.name}</td>
@@ -74,34 +106,56 @@ export default function UserManager() {
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
-            <h3 className="text-lg font-bold text-solara-dark font-georgia mb-4">+ Add New Staff</h3>
+            <h3 className="text-lg font-bold text-solara-dark font-georgia mb-4">
+              + Add New Staff
+            </h3>
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
-                <label className="block text-xs font-semibold text-solara-dark mb-1">Full Name</label>
+                <label className="block text-xs font-semibold text-solara-dark mb-1">
+                  Full Name
+                </label>
                 <input className="input-field" value={form.name}
-                  onChange={e => setForm({ ...form, name: e.target.value })} required />
+                  onChange={e => setForm({ ...form, name: e.target.value })}
+                  placeholder="e.g. Lipra Qriz Abyan"
+                  required />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-solara-dark mb-1">Email</label>
+                <label className="block text-xs font-semibold text-solara-dark mb-1">
+                  Email
+                </label>
                 <input type="email" className="input-field" value={form.email}
-                  onChange={e => setForm({ ...form, email: e.target.value })} required />
+                  onChange={e => setForm({ ...form, email: e.target.value })}
+                  placeholder="e.g. lipra@solara.com"
+                  required />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-solara-dark mb-1">Password</label>
+                <label className="block text-xs font-semibold text-solara-dark mb-1">
+                  Password <span className="text-gray-400 font-normal">(min. 6 characters)</span>
+                </label>
                 <input type="password" className="input-field" value={form.password}
-                  onChange={e => setForm({ ...form, password: e.target.value })} required />
+                  onChange={e => setForm({ ...form, password: e.target.value })}
+                  placeholder="••••••••"
+                  minLength={6}
+                  required />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-solara-dark mb-1">Role</label>
+                <label className="block text-xs font-semibold text-solara-dark mb-1">
+                  Role
+                </label>
                 <select className="input-field" value={form.role}
                   onChange={e => setForm({ ...form, role: e.target.value })}>
-                  <option value="staff">Staff / Cashier</option>
-                  <option value="admin">Admin</option>
+                  <option value="staff">🧑‍💼 Staff / Cashier</option>
+                  <option value="admin">👑 Admin</option>
                 </select>
               </div>
               <div className="flex gap-3 pt-2">
-                <button type="submit" className="btn-primary flex-1">Create User</button>
-                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">Cancel</button>
+                <button type="submit" className="btn-primary flex-1">
+                  Create User
+                </button>
+                <button type="button" onClick={() => setShowForm(false)}
+                  className="btn-secondary flex-1">
+                  Cancel
+                </button>
               </div>
             </form>
           </div>

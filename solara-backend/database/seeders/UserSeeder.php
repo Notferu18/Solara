@@ -11,14 +11,14 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name'     => 'Admin Solara',
+            'name'     => 'Admin',
             'email'    => 'admin@solara.com',
             'password' => Hash::make('123'),
             'role'     => 'admin',
         ]);
 
         User::create([
-            'name'     => 'Staff One',
+            'name'     => 'Staff',
             'email'    => 'staff@solara.com',
             'password' => Hash::make('123'),
             'role'     => 'staff',
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name'     => 'Shayne Anne Silagan',
-            'email'    => 'customer@solara.com',
+            'email'    => 'shaen@solara.com',
             'password' => Hash::make('123'),
             'role'     => 'customer',
         ]);
