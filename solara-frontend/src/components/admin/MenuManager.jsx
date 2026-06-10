@@ -9,7 +9,7 @@ export default function MenuManager() {
   const [editItem,   setEditItem]   = useState(null);
   const [search,     setSearch]     = useState('');
   const [form,       setForm]       = useState({
-    name: '', category_id: '', price: '', description: '', stock_quantity: '', is_available: true
+    name: '', category_id: '', price: '', description: '', is_available: true
   });
 
   useEffect(() => { fetchItems(); fetchCategories(); }, []);
@@ -25,7 +25,7 @@ export default function MenuManager() {
 
   const openAdd = () => {
     setEditItem(null);
-    setForm({ name: '', category_id: '', price: '', description: '', stock_quantity: '', is_available: true });
+    setForm({ name: '', category_id: '', price: '', description: '', is_available: true });
     setShowForm(true);
   };
 
@@ -36,7 +36,6 @@ export default function MenuManager() {
       category_id:    item.category_id,
       price:          item.price,
       description:    item.description ?? '',
-      stock_quantity: item.stock_quantity,
       is_available:   item.is_available,
     });
     setShowForm(true);
@@ -88,7 +87,7 @@ export default function MenuManager() {
         <table className="w-full text-sm">
           <thead className="bg-solara-dark text-white">
             <tr>
-              {['Item', 'Category', 'Price', 'Stock', 'Status', 'Actions'].map(h => (
+              {['Item', 'Category', 'Price', 'Status', 'Actions'].map(h => (
                 <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
               ))}
             </tr>
@@ -104,11 +103,6 @@ export default function MenuManager() {
                 <td className="px-4 py-3 text-gray-500">{item.category?.name}</td>
                 <td className="px-4 py-3 text-solara-brown font-bold">
                   ₱{Number(item.price).toFixed(2)}
-                </td>
-                <td className="px-4 py-3">
-                  <span className={`font-semibold ${item.stock_quantity < 10 ? 'text-red-500' : 'text-green-600'}`}>
-                    {item.stock_quantity}
-                  </span>
                 </td>
                 <td className="px-4 py-3">
                   <button onClick={() => toggleAvailability(item)}
@@ -161,21 +155,12 @@ export default function MenuManager() {
                   ))}
                 </select>
               </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-solara-dark mb-1">
-                    Price (₱)
-                  </label>
-                  <input type="number" step="0.01" className="input-field" value={form.price}
-                    onChange={e => setForm({ ...form, price: e.target.value })} required />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-solara-dark mb-1">
-                    Stock Qty
-                  </label>
-                  <input type="number" className="input-field" value={form.stock_quantity}
-                    onChange={e => setForm({ ...form, stock_quantity: e.target.value })} required />
-                </div>
+              <div>
+                <label className="block text-xs font-semibold text-solara-dark mb-1">
+                  Price (₱)
+                </label>
+                <input type="number" step="0.01" className="input-field" value={form.price}
+                  onChange={e => setForm({ ...form, price: e.target.value })} required />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-solara-dark mb-1">

@@ -6,6 +6,7 @@ export default function UserManager() {
   const [loading,  setLoading]  = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [success,  setSuccess]  = useState('');
+  const [search,   setSearch]   = useState('');
   const [form,     setForm]     = useState({ name: '', email: '', password: '', role: 'staff' });
 
   useEffect(() => { fetchUsers(); }, []);
@@ -46,19 +47,60 @@ export default function UserManager() {
 
   const roleIcons = { admin: '👑', staff: '🧑‍💼', customer: '🙋' };
 
+  const filteredUsers = users.filter(u =>
+    u.name.toLowerCase().includes(search.toLowerCase()) ||
+    u.email.toLowerCase().includes(search.toLowerCase()) ||
+    u.role.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const staffCount = users.filter(u => u.role === 'staff').length;
+  const adminCount = users.filter(u => u.role === 'admin').length;
+  const customerCount = users.filter(u => u.role === 'customer').length;
+
   return (
     <div className="space-y-6">
 
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 className="text-xl font-bold text-solara-dark">User Management</h2>
+          <p className="text-sm text-gray-500">Create and manage staff accounts with fewer clicks.</p>
+        </div>
+        <button onClick={() => setShowForm(true)} className="btn-primary px-5 py-2">
+          + Add Staff
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+        <div className="rounded-2xl border border-solara-cream bg-white p-4">
+          <div className="text-xs uppercase tracking-wide text-gray-500">Total Users</div>
+          <div className="text-2xl font-bold text-solara-dark">{users.length}</div>
+        </div>
+        <div className="rounded-2xl border border-solara-cream bg-white p-4">
+          <div className="text-xs uppercase tracking-wide text-gray-500">Staff</div>
+          <div className="text-2xl font-bold text-solara-dark">{staffCount}</div>
+        </div>
+        <div className="rounded-2xl border border-solara-cream bg-white p-4">
+          <div className="text-xs uppercase tracking-wide text-gray-500">Admins</div>
+          <div className="text-2xl font-bold text-solara-dark">{adminCount}</div>
+        </div>
+        <div className="rounded-2xl border border-solara-cream bg-white p-4">
+          <div className="text-xs uppercase tracking-wide text-gray-500">Customers</div>
+          <div className="text-2xl font-bold text-solara-dark">{customerCount}</div>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <input
+          type="text"
+          placeholder="Search by name, email, or role..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="input-field w-full sm:w-80"
+        />
         {success && (
           <div className="text-green-600 text-sm font-semibold">{success}</div>
         )}
-        <div className="ml-auto">
-          <button onClick={() => setShowForm(true)} className="btn-primary">
-            + Add Staff
-          </button>
-        </div>
       </div>
 
       {/* Table */}
@@ -78,13 +120,13 @@ export default function UserManager() {
                   Loading...
                 </td>
               </tr>
-            ) : users.length === 0 ? (
+            ) : filteredUsers.length === 0 ? (
               <tr>
                 <td colSpan={4} className="text-center py-12 text-gray-400">
                   No users found
                 </td>
               </tr>
-            ) : users.map((u, i) => (
+            ) : filteredUsers.map((u, i) => (
               <tr key={u.id} className={i % 2 === 0 ? 'bg-white' : 'bg-solara-light'}>
                 <td className="px-4 py-3 font-semibold text-solara-dark">{u.name}</td>
                 <td className="px-4 py-3 text-gray-500">{u.email}</td>
@@ -144,8 +186,8 @@ export default function UserManager() {
                 </label>
                 <select className="input-field" value={form.role}
                   onChange={e => setForm({ ...form, role: e.target.value })}>
-                  <option value="staff">🧑‍💼 Staff / Cashier</option>
-                  <option value="admin">👑 Admin</option>
+                  <option value="staff">Staff / Cashier</option>
+                  <option value="admin">Admin</option>
                 </select>
               </div>
               <div className="flex gap-3 pt-2">

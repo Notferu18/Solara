@@ -20,7 +20,6 @@ class MenuController extends Controller
             'name'           => 'required|string|max:255',
             'category_id'    => 'required|exists:categories,id',
             'price'          => 'required|numeric|min:0',
-            'stock_quantity' => 'required|integer|min:0',
             'description'    => 'nullable|string',
             'is_available'   => 'boolean',
         ]);

@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import MenuManager from './MenuManager';
-import InventoryPanel from './InventoryPanel';
 import UserManager from './UserManager';
 import ReportsPanel from './ReportsPanel';
 import ForecastWidget from './ForecastWidget';
@@ -18,7 +17,6 @@ export default function AdminDashboard() {
   const navItems = [
   { key: 'dashboard', label: 'Dashboard', icon: '📊', path: '/admin/dashboard' },
   { key: 'menu',      label: 'Menu',      icon: '🍽️', path: '/admin/menu' },
-  { key: 'inventory', label: 'Inventory', icon: '📦', path: '/admin/inventory' },
   { key: 'users',     label: 'Users',     icon: '👥', path: '/admin/users' },
   { key: 'reports',   label: 'Reports',   icon: '📈', path: '/admin/reports' },
   { key: 'forecast',  label: 'Forecast',  icon: '🤖', path: '/admin/forecast' }, 
@@ -27,7 +25,6 @@ export default function AdminDashboard() {
   const getActivePage = () => {
     const path = location.pathname;
     if (path.includes('/admin/menu'))      return 'menu';
-    if (path.includes('/admin/inventory')) return 'inventory';
     if (path.includes('/admin/users'))     return 'users';
     if (path.includes('/admin/reports'))   return 'reports';
     if (path.includes('/admin/forecast'))  return 'forecast';
@@ -39,7 +36,6 @@ export default function AdminDashboard() {
   const renderPage = () => {
     switch (activePage) {
       case 'menu':      return <MenuManager />;
-      case 'inventory': return <InventoryPanel />;
       case 'users':     return <UserManager />;
       case 'reports':   return <ReportsPanel />;
       case 'forecast':  return <ForecastWidget />;
@@ -109,10 +105,15 @@ export default function AdminDashboard() {
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
         {/* Topbar */}
-        <div className="bg-white border-b border-solara-cream px-8 py-4 flex items-center justify-between sticky top-0 z-10">
-          <h2 className="text-xl font-bold text-solara-dark font-georgia capitalize">
-            {navItems.find(n => n.key === activePage)?.icon} {navItems.find(n => n.key === activePage)?.label}
-          </h2>
+        <div className="bg-white border-b border-solara-cream px-8 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sticky top-0 z-10">
+          <div>
+            <h2 className="text-xl font-bold text-solara-dark font-georgia capitalize">
+              {navItems.find(n => n.key === activePage)?.icon} {navItems.find(n => n.key === activePage)?.label}
+            </h2>
+            <p className="text-sm text-gray-500">
+              Welcome back, {user?.name}. 
+            </p>
+          </div>
           <span className="text-sm text-gray-400">👑 Admin Panel</span>
         </div>
 
@@ -157,7 +158,7 @@ function DashboardHome() {
       setLoading(true);
       const [ordersRes, menuRes, reportsRes] = await Promise.all([
         api.get('/orders'),
-        api.get('/inventory'),
+        api.get('/menu-items'),
         api.get('/reports/sales?period=weekly'),
       ]);
 
@@ -171,18 +172,14 @@ function DashboardHome() {
       const completedTodayOrders = allTodayOrders.filter(o => o.status === 'completed');
       const todayRevenue = completedTodayOrders.reduce((sum, o) => sum + (Number(o.total_amount) || 0), 0);
 
-      // Count low stock items (match InventoryPanel logic: <10)
-      const lowStock = menuItems.filter(m => {
-        const qty = Number(m.stock_quantity ?? m.stock ?? m.quantity ?? 0);
-        return !Number.isNaN(qty) && qty < 10;
-      }).length;
+      const pendingTodayOrders = allTodayOrders.filter(o => o.status !== 'completed').length;
 
       setStats([
         { label: 'All Orders Today', value: allTodayOrders.length.toString(), icon: '📦', color: 'bg-sky-50 border-sky-200' },
         { label: 'Completed Orders Today', value: completedTodayOrders.length.toString(), icon: '🧾', color: 'bg-amber-50 border-amber-200' },
+        { label: 'Pending Orders Today', value: pendingTodayOrders.toString(), icon: '⌛', color: 'bg-purple-50 border-purple-200' },
         { label: 'Revenue Today', value: `₱${todayRevenue.toFixed(2)}`, icon: '💰', color: 'bg-green-50 border-green-200' },
         { label: 'Menu Items', value: menuItems.length.toString(), icon: '🍽️', color: 'bg-blue-50 border-blue-200' },
-        { label: 'Low Stock Items', value: lowStock.toString(), icon: '⚠️', color: 'bg-red-50 border-red-200' },
       ]);
 
       // Reports data for charts
@@ -195,7 +192,7 @@ function DashboardHome() {
       setLastUpdated(new Date());
       setLoading(false);
 
-      // debug logs to help troubleshooting low-stock or API shape issues
+      // debug logs to help troubleshooting dashboard API shape issues
       // eslint-disable-next-line no-console
       console.log('Dashboard fetch:', { orders: orders.length, menu: menuItems.length, reports });
     } catch (err) {
@@ -205,7 +202,6 @@ function DashboardHome() {
         { label: 'Total Orders Today', value: '—', icon: '🧾', color: 'bg-amber-50 border-amber-200' },
         { label: 'Revenue Today', value: '—', icon: '💰', color: 'bg-green-50 border-green-200' },
         { label: 'Menu Items', value: '—', icon: '🍽️', color: 'bg-blue-50 border-blue-200' },
-        { label: 'Low Stock Items', value: '—', icon: '⚠️', color: 'bg-red-50 border-red-200' },
       ]);
       setChartData(null);
       setTopItems(null);
@@ -242,10 +238,10 @@ function DashboardHome() {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {stats.map((s, i) => {
           const navMap = {
-            'Low Stock Items': '/admin/inventory',
             'Menu Items': '/admin/menu',
             'All Orders Today': '/admin/reports',
             'Completed Orders Today': '/admin/reports',
+            'Pending Orders Today': '/admin/reports',
             'Revenue Today': '/admin/reports',
           };
           const to = navMap[s.label] ?? null;

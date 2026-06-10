@@ -53,11 +53,6 @@ export default function App() {
             <AdminDashboard />
           </ProtectedRoute>
         } />
-        <Route path="/admin/inventory" element={
-          <ProtectedRoute roles={['admin']}>
-            <AdminDashboard />
-          </ProtectedRoute>
-        } />
         <Route path="/admin/users" element={
           <ProtectedRoute roles={['admin']}>
             <AdminDashboard />

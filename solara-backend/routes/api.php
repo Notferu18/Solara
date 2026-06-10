@@ -5,7 +5,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ForecastController;
 
@@ -39,10 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders',             [OrderController::class, 'index'])->middleware('role:admin,staff');
     Route::post('/orders',            [OrderController::class, 'store'])->middleware('role:staff');
     Route::put('/orders/{id}/status', [OrderController::class, 'updateStatus'])->middleware('role:staff');
-
-    // Inventory
-    Route::get('/inventory',          [InventoryController::class, 'index'])->middleware('role:admin,staff');
-    Route::post('/inventory/restock', [InventoryController::class, 'restock'])->middleware('role:admin');
 
     // Reports
     Route::get('/reports/sales',      [ReportController::class, 'sales'])->middleware('role:admin');

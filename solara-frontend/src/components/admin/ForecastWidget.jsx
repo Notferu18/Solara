@@ -6,13 +6,21 @@ import {
 } from 'recharts';
 
 export default function ForecastWidget() {
-  const [data,    setData]    = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error,   setError]   = useState('');
-  const [source,  setSource]  = useState('ml');
+  const [data,       setData]       = useState([]);
+  const [loading,    setLoading]    = useState(true);
+  const [error,      setError]      = useState('');
+  const [source,     setSource]     = useState('ml');
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [autoRefresh, setAutoRefresh] = useState(false);
 
   useEffect(() => { fetchForecast(); }, []);
+
+  // Auto-refresh every 10 minutes if enabled
+  useEffect(() => {
+    if (!autoRefresh) return;
+    const interval = setInterval(fetchForecast, 600000); // 10 minutes
+    return () => clearInterval(interval);
+  }, [autoRefresh]);
 
   const fetchForecast = async () => {
     setLoading(true);
@@ -46,9 +54,18 @@ export default function ForecastWidget() {
             Predicted order quantities using Random Forest Regressor
           </p>
         </div>
-        <button onClick={fetchForecast} className="btn-secondary text-sm">
-          🔄 Refresh
-        </button>
+        <div className="flex items-center gap-2">
+          <label className="flex items-center gap-2 text-xs font-semibold text-gray-600 cursor-pointer">
+            <input type="checkbox" checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)}
+              className="rounded border-gray-300" />
+            Auto-refresh
+          </label>
+          <button onClick={fetchForecast} disabled={loading}
+            className="btn-secondary text-sm inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+            {loading ? <span className="h-4 w-4 rounded-full border-2 border-current border-t-transparent animate-spin" /> : '🔄'}
+            {loading ? 'Fetching...' : 'Refresh'}
+          </button>
+        </div>
       </div>
 
       {/* ML Badge */}
@@ -60,23 +77,37 @@ export default function ForecastWidget() {
               Supervised ML — Random Forest Regressor
             </p>
             <p className="text-xs text-gray-500">
-              Model trained on historical sales data
+              Model trained on historical sales data • Data quality: {data.length > 0 ? 'Good ✅' : 'Pending'}
             </p>
           </div>
         </div>
         <div className="text-right text-xs text-gray-600">
-          <div>Source: <span className="font-semibold">{source === 'ml' ? 'ML Model' : 'Fallback estimate'}</span></div>
-          {lastUpdated && <div>Updated: {lastUpdated.toLocaleTimeString()}</div>}
+          <div>Source: <span className={`font-semibold ${source === 'ml' ? 'text-green-600' : 'text-orange-600'}`}>
+            {source === 'ml' ? '🧠 ML Model' : '📊 Fallback'}
+          </span></div>
+          {lastUpdated && (
+            <div className="mt-1 text-gray-500">
+              Updated {Math.floor((Date.now() - lastUpdated.getTime()) / 1000) < 60 
+                ? 'just now' 
+                : `${Math.floor((Date.now() - lastUpdated.getTime()) / 60000)}m ago`}
+            </div>
+          )}
         </div>
       </div>
 
       {loading ? (
-        <div className="card text-center py-12 text-gray-400">
-          Loading predictions...
+        <div className="flex items-center justify-center py-8">
+          <div className="text-center">
+            <div className="h-8 w-8 rounded-full border-4 border-solara-cream border-t-solara-brown animate-spin mx-auto mb-3" />
+            <p className="text-sm text-gray-500">Loading predictions...</p>
+          </div>
         </div>
       ) : error ? (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
-          ⚠️ {error}
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-4 rounded-xl text-sm flex items-center justify-between">
+          <span>⚠️ {error}</span>
+          <button onClick={fetchForecast} className="btn-secondary text-xs py-1 px-3">
+            Retry
+          </button>
         </div>
       ) : (
         <>
@@ -99,34 +130,46 @@ export default function ForecastWidget() {
 
           {/* Table */}
           <div className="card p-0 overflow-hidden">
+            <div className="px-4 py-3 bg-solara-light border-b border-solara-cream text-xs text-gray-600 font-semibold">
+              💡 Tip: Use predicted demand to plan staffing and preparation timing.
+            </div>
             <table className="w-full text-sm">
               <thead className="bg-solara-dark text-white">
                 <tr>
-                  {['Item', 'Category', 'Price', 'Avg Sales', 'Predicted Demand'].map(h => (
+                  {['Item', 'Category', 'Price', 'Avg Sales', 'Predicted Demand', 'Change'].map(h => (
                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, i) => (
-                  <tr key={item.id}
-                    className={i % 2 === 0 ? 'bg-white' : 'bg-solara-light'}>
-                    <td className="px-4 py-3 font-semibold text-solara-dark">
-                      {item.name}
-                    </td>
-                    <td className="px-4 py-3 text-gray-500">{item.category}</td>
-                    <td className="px-4 py-3 text-solara-brown font-bold">
-                      ₱{Number(item.price).toFixed(2)}
-                    </td>
-                    <td className="px-4 py-3 text-gray-600">{item.avg_sales} units</td>
-                    <td className="px-4 py-3">
-                      <span className="bg-solara-cream text-solara-dark font-bold
-                                       px-2 py-1 rounded-full text-xs">
-                        📦 {item.predicted_quantity} units
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                {data.map((item, i) => {
+                  const change = item.predicted_quantity - item.avg_sales;
+                  const changePercent = item.avg_sales > 0 ? ((change / item.avg_sales) * 100).toFixed(0) : 0;
+                  return (
+                    <tr key={item.id}
+                      className={i % 2 === 0 ? 'bg-white' : 'bg-solara-light'}>
+                      <td className="px-4 py-3 font-semibold text-solara-dark">
+                        {item.name}
+                      </td>
+                      <td className="px-4 py-3 text-gray-500">{item.category}</td>
+                      <td className="px-4 py-3 text-solara-brown font-bold">
+                        ₱{Number(item.price).toFixed(2)}
+                      </td>
+                      <td className="px-4 py-3 text-gray-600">{item.avg_sales} units</td>
+                      <td className="px-4 py-3">
+                        <span className="bg-solara-cream text-solara-dark font-bold
+                                         px-2 py-1 rounded-full text-xs">
+                          📦 {item.predicted_quantity} units
+                        </span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className={`text-xs font-bold ${change > 0 ? 'text-green-600' : change < 0 ? 'text-red-600' : 'text-gray-500'}`}>
+                          {change > 0 ? '↑' : change < 0 ? '↓' : '→'} {Math.abs(changePercent)}%
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

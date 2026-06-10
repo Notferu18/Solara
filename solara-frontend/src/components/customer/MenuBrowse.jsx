@@ -149,7 +149,7 @@ export default function MenuBrowse() {
                         </button>
                       ) : (
                         <button disabled className="btn-secondary w-full text-sm opacity-50 cursor-not-allowed">
-                          Out of Stock
+                          Unavailable
                         </button>
                       )}
                     </div>

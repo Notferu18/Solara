@@ -12,13 +12,15 @@ use App\Models\User;
 class OrderController extends Controller
 {
     // Admin + Staff: all orders
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(
-            Order::with(['orderItems.menuItem', 'user'])
-                 ->latest()
-                 ->get()
-        );
+        $query = Order::with(['orderItems.menuItem', 'user'])->latest();
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        return response()->json($query->get());
     }
 
     // Customer: their own orders only
@@ -44,15 +46,12 @@ class OrderController extends Controller
 
         DB::beginTransaction();
         try {
-            // Calculate total
             $total = 0;
             foreach ($request->items as $item) {
                 $menuItem = MenuItem::findOrFail($item['menu_item_id']);
                 $total   += $menuItem->price * $item['quantity'];
             }
 
-            // Create order with a temporary unique placeholder number,
-            // then update it based on the generated order ID.
             $order = Order::create([
                 'user_id'        => $request->user()->id,
                 'order_number'   => 'ORD-TMP-' . uniqid(),
@@ -64,7 +63,6 @@ class OrderController extends Controller
             $orderNumber = 'ORD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT);
             $order->update(['order_number' => $orderNumber]);
 
-            // Create order items + deduct stock
             foreach ($request->items as $item) {
                 $menuItem = MenuItem::findOrFail($item['menu_item_id']);
 
@@ -75,9 +73,6 @@ class OrderController extends Controller
                     'unit_price'   => $menuItem->price,
                     'subtotal'     => $menuItem->price * $item['quantity'],
                 ]);
-
-                // Deduct stock
-                $menuItem->decrement('stock_quantity', $item['quantity']);
             }
 
             DB::commit();
@@ -100,82 +95,77 @@ class OrderController extends Controller
         $order->update(['status' => $request->status]);
         return response()->json($order);
     }
-    
+
     public function kioskStore(Request $request)
-{
-    $request->validate([
-        'items'                => 'required|array|min:1',
-        'items.*.menu_item_id' => 'required|exists:menu_items,id',
-        'items.*.quantity'     => 'required|integer|min:1',
-        'payment_method'       => 'required|string',
-    ]);
-
-    DB::beginTransaction();
-    try {
-        $total = 0;
-        foreach ($request->items as $item) {
-            $menuItem = MenuItem::findOrFail($item['menu_item_id']);
-            $total   += $menuItem->price * $item['quantity'];
-        }
-
-        $kioskUser = User::firstOrCreate(
-            ['email' => 'kiosk@solara.com'],
-            [
-                'name'     => 'Kiosk Guest',
-                'password' => bcrypt('kiosk123'),
-                'role'     => 'customer',
-            ]
-        );
-
-        $order = Order::create([
-            'user_id'        => $kioskUser->id,
-            'order_number'   => 'ORD-TMP-' . uniqid(),
-            'queue_number'   => 'Q-TMP-' . uniqid(),
-            'status'         => 'pending',
-            'total_amount'   => $total,
-            'payment_method' => $request->payment_method,
+    {
+        $request->validate([
+            'items'                => 'required|array|min:1',
+            'items.*.menu_item_id' => 'required|exists:menu_items,id',
+            'items.*.quantity'     => 'required|integer|min:1',
+            'payment_method'       => 'required|string',
         ]);
 
-        $orderNumber = 'ORD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT);
-        $queueNumber = 'Q-' . str_pad($order->id, 3, '0', STR_PAD_LEFT);
-        $order->update([
-            'order_number' => $orderNumber,
-            'queue_number' => $queueNumber,
-        ]);
+        DB::beginTransaction();
+        try {
+            $total = 0;
+            foreach ($request->items as $item) {
+                $menuItem = MenuItem::findOrFail($item['menu_item_id']);
+                $total   += $menuItem->price * $item['quantity'];
+            }
 
-        foreach ($request->items as $item) {
-            $menuItem = MenuItem::findOrFail($item['menu_item_id']);
-            OrderItem::create([
-                'order_id'     => $order->id,
-                'menu_item_id' => $item['menu_item_id'],
-                'quantity'     => $item['quantity'],
-                'unit_price'   => $menuItem->price,
-                'subtotal'     => $menuItem->price * $item['quantity'],
+            $kioskUser = User::firstOrCreate(
+                ['email' => 'kiosk@solara.com'],
+                [
+                    'name'     => 'Kiosk Guest',
+                    'password' => bcrypt('kiosk123'),
+                    'role'     => 'customer',
+                ]
+            );
+
+            $order = Order::create([
+                'user_id'        => $kioskUser->id,
+                'order_number'   => 'ORD-TMP-' . uniqid(),
+                'queue_number'   => 'Q-TMP-' . uniqid(),
+                'status'         => 'pending',
+                'total_amount'   => $total,
+                'payment_method' => $request->payment_method,
             ]);
-            $menuItem->decrement('stock_quantity', $item['quantity']);
+
+            $orderNumber = 'ORD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT);
+            $queueNumber = 'Q-' . str_pad($order->id, 3, '0', STR_PAD_LEFT);
+            $order->update([
+                'order_number' => $orderNumber,
+                'queue_number' => $queueNumber,
+            ]);
+
+            foreach ($request->items as $item) {
+                $menuItem = MenuItem::findOrFail($item['menu_item_id']);
+                OrderItem::create([
+                    'order_id'     => $order->id,
+                    'menu_item_id' => $item['menu_item_id'],
+                    'quantity'     => $item['quantity'],
+                    'unit_price'   => $menuItem->price,
+                    'subtotal'     => $menuItem->price * $item['quantity'],
+                ]);
+            }
+
+            DB::commit();
+            return response()->json($order->load('orderItems.menuItem'), 201);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Order failed: ' . $e->getMessage()], 500);
         }
-
-        DB::commit();
-        return response()->json([
-            'order_number' => $orderNumber,
-            'queue_number' => $queueNumber,
-            'total'        => $total,
-        ], 201);
-
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return response()->json(['message' => 'Order failed: ' . $e->getMessage()], 500);
     }
-}
 
-public function queue()
-{
-    $orders = Order::with('orderItems.menuItem')
-        ->whereDate('created_at', today())
-        ->whereIn('status', ['pending', 'preparing', 'ready'])
-        ->orderBy('created_at', 'asc')
-        ->get();
+    public function queue()
+    {
+        $orders = Order::with('orderItems.menuItem')
+            ->whereDate('created_at', today())
+            ->whereIn('status', ['pending', 'preparing', 'ready'])
+            ->orderBy('created_at', 'asc')
+            ->get();
 
-    return response()->json($orders);
-}
+        return response()->json($orders);
+    }
 }
