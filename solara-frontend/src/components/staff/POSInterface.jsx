@@ -8,7 +8,8 @@ export default function POSInterface() {
   const [categories,     setCategories]     = useState([]);
   const [activeCategory, setActiveCategory] = useState('All');
   const [cart,           setCart]           = useState([]);
-  const [loading,        setLoading]        = useState(true);
+  const [menuLoading,    setMenuLoading]    = useState(true);
+  const [ordersLoading,  setOrdersLoading]  = useState(false);
   const [submitting,     setSubmitting]     = useState(false);
   const [success,        setSuccess]        = useState('');
   const [activeTab,      setActiveTab]      = useState('pos');
@@ -29,11 +30,14 @@ export default function POSInterface() {
   }, [activeTab]);
 
   const fetchMenu = async () => {
+    setMenuLoading(true);
     try {
       const res = await api.get('/menu-items');
       setMenuItems(res.data);
-    } catch {}
-    setLoading(false);
+    } catch (err) {
+      console.error('Menu fetch error:', err);
+    }
+    setMenuLoading(false);
   };
 
   const fetchCategories = async () => {
@@ -45,10 +49,14 @@ export default function POSInterface() {
 
   // ── Uses queue endpoint ─────────────────────────────────────
   const fetchOrders = async () => {
+    setOrdersLoading(true);
     try {
       const res = await api.get('/orders/queue');
       setOrders(res.data);
-    } catch {}
+    } catch (err) {
+      console.error('Order queue fetch error:', err);
+    }
+    setOrdersLoading(false);
   };
 
   const filteredItems = activeCategory === 'All'
@@ -151,8 +159,19 @@ export default function POSInterface() {
             {/* Menu Grid */}
             <div className="flex-1 flex flex-col overflow-hidden">
               <div className="bg-white border-b border-solara-cream px-6 py-4 sticky top-0 z-10">
-                <h2 className="text-lg font-bold text-solara-dark font-georgia mb-3">🧾 New Order</h2>
-                <div className="flex gap-2 flex-wrap">
+                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <h2 className="text-lg font-bold text-solara-dark font-georgia mb-3">🧾 New Order</h2>
+                    <p className="text-sm text-gray-500">Select items, update quantities, then place the order.</p>
+                  </div>
+                  <button onClick={fetchMenu}
+                    disabled={menuLoading}
+                    className="btn-secondary text-sm inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                    {menuLoading ? <span className="h-4 w-4 rounded-full border-2 border-current border-t-transparent animate-spin" /> : '🔄'}
+                    Refresh Menu
+                  </button>
+                </div>
+                <div className="mt-4 flex gap-2 flex-wrap">
                   {categories.map(cat => (
                     <button key={cat.id} onClick={() => setActiveCategory(cat.name)}
                       className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors
@@ -166,7 +185,7 @@ export default function POSInterface() {
               </div>
 
               <div className="flex-1 overflow-y-auto p-6">
-                {loading ? (
+                {menuLoading ? (
                   <div className="text-center text-gray-400 py-12">Loading menu...</div>
                 ) : filteredItems.length === 0 ? (
                   <div className="text-center text-gray-400 py-12">No items found</div>
@@ -240,18 +259,26 @@ export default function POSInterface() {
         ) : (
           /* ── Order Queue ─────────────────────────────────── */
           <div className="flex-1 overflow-y-auto p-8">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
               <div>
                 <h2 className="text-xl font-bold text-solara-dark font-georgia">
                   📋 Order Queue
                 </h2>
                 <p className="text-xs text-gray-400 mt-1">
-                  🔄 Auto-refreshes every 5 seconds
+                  {ordersLoading ? 'Refreshing orders…' : '🔄 Auto-refreshes every 5 seconds'}
                 </p>
               </div>
-              <button onClick={fetchOrders} className="btn-secondary text-sm">
-                🔄 Refresh Now
-              </button>
+              <div className="flex items-center gap-3">
+                <div className="rounded-full bg-solara-cream px-3 py-1 text-xs font-semibold text-solara-dark">
+                  {orders.length} active order{orders.length !== 1 ? 's' : ''}
+                </div>
+                <button onClick={fetchOrders}
+                  disabled={ordersLoading}
+                  className="btn-secondary text-sm inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                  {ordersLoading ? <span className="h-4 w-4 rounded-full border-2 border-current border-t-transparent animate-spin" /> : '🔄'}
+                  Refresh Now
+                </button>
+              </div>
             </div>
 
             {orders.length === 0 ? (

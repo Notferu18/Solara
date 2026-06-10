@@ -1,12 +1,14 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
+from pathlib import Path
 
 app    = Flask(__name__)
+BASE_DIR = Path(__file__).resolve().parent
 
 # ── Load saved .pkl files ────────────────────────────────
-model  = joblib.load('ml/model.pkl')   # Random Forest Regressor
-scaler = joblib.load('ml/scaler.pkl')  # StandardScaler
+model  = joblib.load(BASE_DIR / 'model.pkl')   # Random Forest Regressor
+scaler = joblib.load(BASE_DIR / 'scaler.pkl')  # StandardScaler
 
 @app.route('/predict', methods=['POST'])
 def predict():

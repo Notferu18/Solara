@@ -99,10 +99,16 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full mt-2 disabled:opacity-50 disabled:cursor-not-allowed">
+              className="btn-primary w-full mt-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+              {loading && <span className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin" />}
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
+
+          <div className="mt-5 rounded-xl bg-solara-light border border-solara-cream p-4 text-xs text-solara-dark">
+            <p className="font-semibold">Staff & Admin Access</p>
+            <p className="mt-1 text-gray-500">Use this panel if you are cafe staff or admin. Customers should place orders through the kiosk.</p>
+          </div>
         </div>
 
         <div className="mt-4 bg-solara-cream rounded-xl p-4 text-xs text-solara-dark space-y-1">

@@ -26,6 +26,7 @@ class ForecastController extends Controller
                 ->get();
 
             $avgSales = $salesData->avg('total_sold') ?? 0;
+            $source = 'ml';
 
             try {
                 $response = Http::timeout(5)->post('http://localhost:5001/predict', [
@@ -37,8 +38,11 @@ class ForecastController extends Controller
                 ]);
 
                 $prediction = $response->json();
+                if (!isset($prediction['predicted_quantity'])) {
+                    $source = 'fallback';
+                }
             } catch (\Exception $e) {
-                // ML server not running — use simple average as fallback
+                $source = 'fallback';
                 $prediction = ['predicted_quantity' => round($avgSales * 1.1, 0)];
             }
 
@@ -49,6 +53,7 @@ class ForecastController extends Controller
                 'price'              => $item->price,
                 'avg_sales'          => round($avgSales, 2),
                 'predicted_quantity' => $prediction['predicted_quantity'] ?? 0,
+                'forecast_source'    => $source,
             ];
         }
 

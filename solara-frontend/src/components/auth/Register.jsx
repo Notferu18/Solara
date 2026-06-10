@@ -148,8 +148,9 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-primary w-full mt-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
+              {loading && <span className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin" />}
               {loading ? 'Creating account...' : 'Register'}
             </button>
           </form>

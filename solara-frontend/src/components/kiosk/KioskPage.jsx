@@ -13,6 +13,8 @@ export default function KioskPage() {
   const [loading,        setLoading]       = useState(true);
   const [submitting,     setSubmitting]    = useState(false);
   const [payment,        setPayment]       = useState('Cash');
+  const [error,          setError]         = useState('');
+  const [refreshing,     setRefreshing]    = useState(false);
 
   useEffect(() => {
     fetchMenu();
@@ -20,11 +22,14 @@ export default function KioskPage() {
   }, []);
 
   const fetchMenu = async () => {
+    setLoading(true);
+    setError('');
     try {
       const res = await axios.get('http://localhost:8000/api/menu-items/public');
       setMenuItems(res.data);
     } catch (err) {
       console.error('Menu fetch error:', err);
+      setError('Could not load menu. Please refresh or try again later.');
     }
     setLoading(false);
   };
@@ -35,6 +40,7 @@ export default function KioskPage() {
       setCategories([{ id: 'all', name: 'All' }, ...res.data]);
     } catch (err) {
       console.error('Categories fetch error:', err);
+      setError('Could not load categories. Category filters may be incomplete.');
     }
   };
 
@@ -63,6 +69,7 @@ export default function KioskPage() {
   const placeOrder = async () => {
     if (cart.length === 0) return;
     setSubmitting(true);
+    setError('');
     try {
       const res = await axios.post('http://localhost:8000/api/orders/kiosk', {
         items:          cart.map(c => ({ menu_item_id: c.id, quantity: c.qty })),
@@ -74,7 +81,7 @@ export default function KioskPage() {
     } catch (err) {
       console.error('Order error:', err);
       const message = err.response?.data?.message || err.message || 'Failed to place order. Please try again.';
-      alert(message);
+      setError(message);
     }
     setSubmitting(false);
   };
@@ -85,6 +92,7 @@ export default function KioskPage() {
     setQueueNum('');
     setSearch('');
     setActiveCategory('All');
+    setError('');
   };
 
   const categoryIcons = {
@@ -208,6 +216,13 @@ export default function KioskPage() {
     );
   }
 
+  const refreshMenu = async () => {
+    setRefreshing(true);
+    await fetchMenu();
+    await fetchCategories();
+    setRefreshing(false);
+  };
+
   // ── MENU SCREEN ─────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-solara-light">
@@ -220,6 +235,14 @@ export default function KioskPage() {
           </div>
         </div>
         <div className="flex items-center gap-3">
+          <button onClick={refreshMenu}
+            disabled={refreshing}
+            className="flex items-center gap-2 rounded-xl border border-solara-cream bg-solara-cream/10 px-4 py-3 text-solara-cream text-sm font-semibold hover:bg-solara-cream/20 disabled:opacity-60 disabled:cursor-not-allowed">
+            {refreshing ? (
+              <span className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
+            ) : '🔄'}
+            Refresh Menu
+          </button>
           <Link to="/login" className="text-solara-cream text-sm font-semibold hover:text-white">
             Back to Login
           </Link>
@@ -236,14 +259,24 @@ export default function KioskPage() {
         </div>
       </div>
 
-      <div className="bg-white border-b border-solara-cream px-8 py-4">
-        <input
-          type="text"
-          placeholder="🔍 Search menu..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          className="input-field max-w-md"
-        />
+      <div className="bg-white border-b border-solara-cream px-8 py-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center">
+          <input
+            type="text"
+            placeholder="🔍 Search menu..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="input-field max-w-md"
+          />
+          <div className="text-sm text-gray-500">
+            {filtered.length} item{filtered.length !== 1 ? 's' : ''} available • {cartCount} in cart
+          </div>
+        </div>
+        {error && (
+          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-red-700 text-sm">
+            {error}
+          </div>
+        )}
       </div>
 
       <div className="bg-white border-b border-solara-cream px-8 py-3 flex gap-2 overflow-x-auto">

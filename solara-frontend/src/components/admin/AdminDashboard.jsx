@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend } from 'recharts';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import MenuManager from './MenuManager';
 import InventoryPanel from './InventoryPanel';
 import UserManager from './UserManager';
@@ -13,6 +13,7 @@ export default function AdminDashboard() {
   const { user, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const navItems = [
   { key: 'dashboard', label: 'Dashboard', icon: '📊', path: '/admin/dashboard' },
@@ -50,12 +51,25 @@ export default function AdminDashboard() {
     <div className="flex h-screen bg-solara-light overflow-hidden">
 
       {/* Sidebar */}
-      <aside className="w-64 bg-solara-dark flex flex-col flex-shrink-0">
+      <aside className={`bg-solara-dark flex flex-col flex-shrink-0 transition-all duration-300 ${sidebarCollapsed ? 'w-20' : 'w-64'}`}>
         {/* Logo */}
-        <div className="px-6 py-6 border-b border-solara-brown">
-          <div className="text-3xl text-center mb-1">☕</div>
-          <h1 className="text-white font-bold text-xl text-center font-georgia">SOLARA</h1>
-          <p className="text-solara-cream text-xs text-center italic">Coffee & Blooms</p>
+        <div className={`px-6 py-6 border-b border-solara-brown flex items-center justify-between ${sidebarCollapsed ? 'flex-col gap-2' : ''}`}>
+          <div className={`text-center ${sidebarCollapsed ? 'w-full' : ''}`}>
+            <div className="text-3xl mb-1">☕</div>
+            {!sidebarCollapsed && (
+              <>
+                <h1 className="text-white font-bold text-xl font-georgia">SOLARA</h1>
+                <p className="text-solara-cream text-xs italic">Coffee & Blooms</p>
+              </>
+            )}
+          </div>
+          <button
+            onClick={() => setSidebarCollapsed(prev => !prev)}
+            className="text-solara-cream hover:text-white transition-colors duration-200"
+            aria-label="Toggle sidebar"
+          >
+            <span className="text-xl">☰</span>
+          </button>
         </div>
 
         {/* Nav */}
@@ -64,26 +78,30 @@ export default function AdminDashboard() {
             <button
               key={item.key}
               onClick={() => navigate(item.path)}
-              className={`w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 text-sm font-semibold transition-colors duration-150
+              className={`w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 text-sm font-semibold transition-colors duration-150 ${sidebarCollapsed ? 'justify-center' : ''}
                 ${activePage === item.key
                   ? 'bg-solara-brown text-white'
                   : 'text-solara-cream hover:bg-solara-brown hover:text-white'}`}
             >
               <span>{item.icon}</span>
-              <span>{item.label}</span>
+              <span className={`${sidebarCollapsed ? 'hidden' : 'block'}`}>{item.label}</span>
             </button>
           ))}
         </nav>
 
         {/* User info + logout */}
         <div className="px-4 py-4 border-t border-solara-brown">
-          <div className="text-solara-cream text-xs mb-1 px-2">Logged in as</div>
-          <div className="text-white text-sm font-bold px-2 mb-3 truncate">{user?.name}</div>
+          {!sidebarCollapsed && (
+            <>
+              <div className="text-solara-cream text-xs mb-1 px-2">Logged in as</div>
+              <div className="text-white text-sm font-bold px-2 mb-3 truncate">{user?.name}</div>
+            </>
+          )}
           <button
             onClick={logout}
-            className="w-full text-left px-4 py-2 rounded-lg text-sm text-red-300 hover:bg-red-900 hover:text-white transition-colors duration-150 font-semibold"
+            className={`w-full ${sidebarCollapsed ? 'px-0 py-2' : 'px-4 py-2'} rounded-lg text-sm ${sidebarCollapsed ? 'text-white' : 'text-red-300'} hover:bg-red-900 hover:text-white transition-colors duration-150 font-semibold flex items-center justify-center`}
           >
-            🚪 Logout
+            🚪 {!sidebarCollapsed && 'Logout'}
           </button>
         </div>
       </aside>
@@ -120,7 +138,7 @@ function DashboardHome() {
   // fetch once and then poll every 5s for faster refresh
   useEffect(() => {
     fetchDashboardStats();
-    const id = setInterval(fetchDashboardStats, 5000);
+    const id = setInterval(fetchDashboardStats, 8000);
 
     const handleVisibility = () => {
       if (document.visibilityState === 'visible') fetchDashboardStats();
@@ -149,8 +167,9 @@ function DashboardHome() {
 
       // Count today's orders
       const today = new Date().toISOString().split('T')[0];
-      const todayOrders = orders.filter(o => o.created_at?.startsWith(today));
-      const todayRevenue = todayOrders.reduce((sum, o) => sum + (Number(o.total_amount) || 0), 0);
+      const allTodayOrders = orders.filter(o => o.created_at?.startsWith(today));
+      const completedTodayOrders = allTodayOrders.filter(o => o.status === 'completed');
+      const todayRevenue = completedTodayOrders.reduce((sum, o) => sum + (Number(o.total_amount) || 0), 0);
 
       // Count low stock items (match InventoryPanel logic: <10)
       const lowStock = menuItems.filter(m => {
@@ -159,7 +178,8 @@ function DashboardHome() {
       }).length;
 
       setStats([
-        { label: 'Total Orders Today', value: todayOrders.length.toString(), icon: '🧾', color: 'bg-amber-50 border-amber-200' },
+        { label: 'All Orders Today', value: allTodayOrders.length.toString(), icon: '📦', color: 'bg-sky-50 border-sky-200' },
+        { label: 'Completed Orders Today', value: completedTodayOrders.length.toString(), icon: '🧾', color: 'bg-amber-50 border-amber-200' },
         { label: 'Revenue Today', value: `₱${todayRevenue.toFixed(2)}`, icon: '💰', color: 'bg-green-50 border-green-200' },
         { label: 'Menu Items', value: menuItems.length.toString(), icon: '🍽️', color: 'bg-blue-50 border-blue-200' },
         { label: 'Low Stock Items', value: lowStock.toString(), icon: '⚠️', color: 'bg-red-50 border-red-200' },
@@ -201,15 +221,35 @@ function DashboardHome() {
       <div className="flex items-center justify-between mb-4">
         <div className="text-sm text-gray-500">{lastUpdated ? `Updated ${lastUpdated.toLocaleTimeString()}` : ''}</div>
         <div className="flex items-center gap-2">
-          <button onClick={fetchDashboardStats} className="px-3 py-1 bg-solara-cream text-solara-dark rounded-lg text-sm font-semibold">Refresh</button>
-          {loading && <div className="text-sm text-gray-400">Loading…</div>}
+          <button
+            onClick={fetchDashboardStats}
+            className="px-3 py-1 bg-solara-cream text-solara-dark rounded-lg text-sm font-semibold flex items-center gap-2"
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="h-4 w-4 rounded-full border-2 border-solara-dark border-t-transparent animate-spin" />
+            ) : (
+              <span>⟳</span>
+            )}
+            Refresh
+          </button>
         </div>
       </div>
+      <div className="rounded-lg border border-solara-cream bg-white p-3 text-sm text-solara-dark/80">
+        Reports and dashboard totals are based on <strong>completed orders</strong> only, so pending orders will not count here.
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {stats.map((s, i) => {
-          const clickable = s.label === 'Low Stock Items' || s.label === 'Menu Items';
-          const to = s.label === 'Low Stock Items' ? '/admin/inventory' : (s.label === 'Menu Items' ? '/admin/menu' : null);
+          const navMap = {
+            'Low Stock Items': '/admin/inventory',
+            'Menu Items': '/admin/menu',
+            'All Orders Today': '/admin/reports',
+            'Completed Orders Today': '/admin/reports',
+            'Revenue Today': '/admin/reports',
+          };
+          const to = navMap[s.label] ?? null;
+          const clickable = Boolean(to);
           return (
             <div
               key={i}
@@ -252,13 +292,13 @@ function DashboardHome() {
           {topItems && topItems.length > 0 ? (
             <div style={{ height: 260 }}>
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie data={topItems} dataKey="total_sold" nameKey="name" cx="50%" cy="50%" outerRadius={90} label>
-                    {topItems.map((_, i) => <Cell key={i} fill={["#5C3317","#B8860B","#8B4513","#D2691E","#A0522D"][i % 5]} />)}
-                  </Pie>
-                  <Legend />
-                  <Tooltip />
-                </PieChart>
+                <BarChart data={topItems} layout="vertical" margin={{ left: 20, right: 20, top: 10, bottom: 10 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis type="number" tick={{ fontSize: 12 }} />
+                  <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 12 }} />
+                  <Tooltip formatter={(val) => Number(val).toLocaleString()} />
+                  <Bar dataKey="total_sold" fill="#B8860B" radius={[4,4,4,4]} />
+                </BarChart>
               </ResponsiveContainer>
             </div>
           ) : (

@@ -1,12 +1,13 @@
+from pathlib import Path
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_absolute_error, r2_score
 import joblib
-import os
 
-csv_path = 'ml/data/solara_sales_data.csv'
+BASE_DIR = Path(__file__).resolve().parent
+csv_path = BASE_DIR / 'data' / 'solara_sales_data.csv'
 df = pd.read_csv(csv_path)
 
 print(f"Loaded {len(df)} records from CSV")
@@ -45,9 +46,8 @@ print(f"   MAE (Mean Absolute Error) : {mae:.2f}")
 print(f"   R² Score                  : {r2:.2f}")
 
 # ── Save as .pkl files (required deliverables) ───────────────
-os.makedirs('ml', exist_ok=True)
-joblib.dump(model,  'ml/model.pkl')
-joblib.dump(scaler, 'ml/scaler.pkl')
+joblib.dump(model,  BASE_DIR / 'model.pkl')
+joblib.dump(scaler, BASE_DIR / 'scaler.pkl')
 
 print("\nmodel.pkl saved!")
 print("scaler.pkl saved!")

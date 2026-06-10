@@ -9,6 +9,8 @@ export default function ForecastWidget() {
   const [data,    setData]    = useState([]);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState('');
+  const [source,  setSource]  = useState('ml');
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   useEffect(() => { fetchForecast(); }, []);
 
@@ -18,8 +20,12 @@ export default function ForecastWidget() {
     try {
       const res = await api.get('/forecast');
       setData(res.data);
+      const firstSource = Array.isArray(res.data) && res.data.length > 0 ? res.data[0].forecast_source : 'ml';
+      setSource(firstSource);
+      setLastUpdated(new Date());
     } catch {
       setError('Could not load forecast. Make sure the ML server is running.');
+      setSource('fallback');
     }
     setLoading(false);
   };
@@ -37,7 +43,7 @@ export default function ForecastWidget() {
             🤖 Demand Forecast
           </h3>
           <p className="text-xs text-gray-400 mt-1">
-            Predicted order quantities using Random Forest Regressor (.pkl model)
+            Predicted order quantities using Random Forest Regressor
           </p>
         </div>
         <button onClick={fetchForecast} className="btn-secondary text-sm">
@@ -46,15 +52,21 @@ export default function ForecastWidget() {
       </div>
 
       {/* ML Badge */}
-      <div className="bg-solara-cream border border-solara-brown rounded-xl px-4 py-3 flex items-center gap-3">
-        <span className="text-2xl">🤖</span>
-        <div>
-          <p className="text-sm font-bold text-solara-dark">
-            Supervised ML — Random Forest Regressor
-          </p>
-          <p className="text-xs text-gray-500">
-            Model trained on historical sales data • Saved as model.pkl + scaler.pkl
-          </p>
+      <div className="bg-solara-cream border border-solara-brown rounded-xl px-4 py-3 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">🤖</span>
+          <div>
+            <p className="text-sm font-bold text-solara-dark">
+              Supervised ML — Random Forest Regressor
+            </p>
+            <p className="text-xs text-gray-500">
+              Model trained on historical sales data
+            </p>
+          </div>
+        </div>
+        <div className="text-right text-xs text-gray-600">
+          <div>Source: <span className="font-semibold">{source === 'ml' ? 'ML Model' : 'Fallback estimate'}</span></div>
+          {lastUpdated && <div>Updated: {lastUpdated.toLocaleTimeString()}</div>}
         </div>
       </div>
 
