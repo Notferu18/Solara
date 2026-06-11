@@ -125,7 +125,6 @@ export default function AdminDashboard() {
   );
 }
 
-// ── Dashboard Home (fetches live stats from backend, charts, and recent orders) ───────
 function DashboardHome() {
   const [stats, setStats] = useState([]);
   const [chartData, setChartData] = useState(null);

@@ -1,9 +1,10 @@
 from pathlib import Path
 import pandas as pd
+import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_absolute_error, r2_score
+from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
 import joblib
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -38,16 +39,22 @@ model.fit(X_train, y_train)
 
 # ── Evaluate the model ───────────────────────────────────────
 y_pred = model.predict(X_test)
-mae    = mean_absolute_error(y_test, y_pred)
-r2     = r2_score(y_test, y_pred)
+
+mae  = mean_absolute_error(y_test, y_pred)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+mape = np.mean(np.abs((y_test - y_pred) / (y_test + 1e-10))) * 100
+r2   = r2_score(y_test, y_pred)
 
 print(f"\nModel Performance:")
-print(f"   MAE (Mean Absolute Error) : {mae:.2f}")
-print(f"   R² Score                  : {r2:.2f}")
+print(f"   MAE  (Mean Absolute Error)       : {mae:.2f} units")
+print(f"   RMSE (Root Mean Squared Error)   : {rmse:.2f} units")
+print(f"   MAPE (Mean Abs Percentage Error) : {mape:.2f}%")
+print(f"   R²   (R-Squared Score)           : {r2:.2f}")
+print(f"\n   Model Accuracy : {100 - mape:.2f}%")
 
 # ── Save as .pkl files (required deliverables) ───────────────
 joblib.dump(model,  BASE_DIR / 'model.pkl')
 joblib.dump(scaler, BASE_DIR / 'scaler.pkl')
 
-print("\nmodel.pkl saved!")
+print("\n model.pkl saved!")
 print("scaler.pkl saved!")
